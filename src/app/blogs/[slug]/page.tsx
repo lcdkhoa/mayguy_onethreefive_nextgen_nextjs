@@ -17,6 +17,10 @@ const blogPosts = [
 
 type Params = Promise<{ slug: string }>;
 
+export async function generateStaticParams() {
+	return blogPosts.map((post) => ({ slug: post.slug }));
+}
+
 export default async function Page({ params }: { params: Params }) {
 	const { slug } = await params;
 	const post = blogPosts.find((p) => p.slug === slug);
