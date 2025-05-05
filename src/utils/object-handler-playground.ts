@@ -1,5 +1,5 @@
 const FlattenObjects = (table: object, splitKey: string = '_') => {
-	const reduce = (path: any, accumulator: any, table: object) => {
+	const reduce = (path: string, accumulator: Record<string, unknown>, table: object) => {
 		if (Array.isArray(table)) {
 			const { length } = table;
 
@@ -40,34 +40,35 @@ const FlattenObjects = (table: object, splitKey: string = '_') => {
 	return reduce('', {}, table);
 };
 
-const UnFlatObjects = (json: any, keySplit: string = '_') => {
-	const result = {};
+const UnFlatObjects = (json: Record<string, unknown>, keySplit: string = '_') => {
+	const result: Record<string, unknown> = {};
 	Object.entries(json).forEach(([key, value]) => {
-		let current = result as any;
+		let current: Record<string, unknown> | unknown[] = result;
 		const parts = key.split(keySplit);
 		parts.forEach((part, i) => {
 			const isArray = /^([^\\[]+)\[(\d+)\]$/.exec(part);
 			if (isArray) {
 				const arrKey = isArray[1];
 				const arrIndex = parseInt(isArray[2]);
-				if (!current[arrKey]) {
-					current[arrKey] = [];
+				const currObj = current as Record<string, unknown>;
+				if (!currObj[arrKey]) {
+					currObj[arrKey] = [];
 				}
 				if (i === parts.length - 1) {
-					current[arrKey][arrIndex] = value;
+					(currObj[arrKey] as unknown[])[arrIndex] = value;
 				} else {
-					if (!current[arrKey][arrIndex]) {
-						current[arrKey][arrIndex] = {};
+					if (!(currObj[arrKey] as unknown[])[arrIndex]) {
+						(currObj[arrKey] as unknown[])[arrIndex] = {};
 					}
-					current = current[arrKey][arrIndex];
+					current = (currObj[arrKey] as unknown[])[arrIndex] as Record<string, unknown>;
 				}
 			} else if (i === parts.length - 1) {
-				current[part] = value;
+				(current as Record<string, unknown>)[part] = value;
 			} else {
-				if (!current[part]) {
-					current[part] = {};
+				if (!(current as Record<string, unknown>)[part]) {
+					(current as Record<string, unknown>)[part] = {};
 				}
-				current = current[part];
+				current = (current as Record<string, unknown>)[part] as Record<string, unknown>;
 			}
 		});
 	});

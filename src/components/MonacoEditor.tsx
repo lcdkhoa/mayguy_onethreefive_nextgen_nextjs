@@ -18,7 +18,7 @@ interface MonacoEditorWrapperProps {
 	language?: string;
 	value: string;
 	onChange: OnChange;
-	options?: Record<string, any>;
+	options?: Record<string, unknown>;
 }
 
 const MonacoEditorWrapper: React.FC<MonacoEditorWrapperProps> = ({

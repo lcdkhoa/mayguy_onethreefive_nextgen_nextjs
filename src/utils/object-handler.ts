@@ -1,5 +1,5 @@
 const FlattenObjects = ((isArray, wrapped) => {
-	const reduce = (path: any, accumulator: any, table: any) => {
+	const reduce = (path: string, accumulator: Record<string, unknown>, table: unknown) => {
 		if (isArray(table)) {
 			const { length } = table;
 
@@ -18,14 +18,14 @@ const FlattenObjects = ((isArray, wrapped) => {
 			let empty = true;
 
 			if (path) {
-				Object.entries(table).forEach(([property, item]) => {
+				Object.entries(table as Record<string, unknown>).forEach(([property, item]) => {
 					const prop = `${path}_${property}`;
 					empty = false;
 					if (wrapped(item) !== item) accumulator[prop] = item;
 					else reduce(prop, accumulator, item);
 				});
 			} else {
-				Object.entries(table).forEach(([property, item]) => {
+				Object.entries(table as Record<string, unknown>).forEach(([property, item]) => {
 					empty = false;
 					if (wrapped(item) !== item) accumulator[property] = item;
 					else reduce(property, accumulator, item);
@@ -37,14 +37,14 @@ const FlattenObjects = ((isArray, wrapped) => {
 
 		return accumulator;
 	};
-	return (table: any) => reduce('', {}, table);
+	return (table: Record<string, unknown>) => reduce('', {}, table);
 })(Array.isArray, Object);
 
 interface NestedObject {
-	[key: string]: any;
+	[key: string]: unknown;
 }
 
-const UnflattenObjects = (json: any, splitKey: string = '_') => {
+const UnflattenObjects = (json: Record<string, unknown>, splitKey: string = '_') => {
 	const result: NestedObject = {};
 	Object.entries(json).forEach(([key, value]) => {
 		const parts = key.split(splitKey);
@@ -60,20 +60,20 @@ const UnflattenObjects = (json: any, splitKey: string = '_') => {
 					current[arrKey] = [];
 				}
 				if (i === parts.length - 1) {
-					current[arrKey][arrIndex] = value;
+					(current[arrKey] as unknown[])[arrIndex] = value;
 				} else {
-					if (!current[arrKey][arrIndex]) {
-						current[arrKey][arrIndex] = {};
+					if (!(current[arrKey] as unknown[])[arrIndex]) {
+						(current[arrKey] as unknown[])[arrIndex] = {};
 					}
-					current = current[arrKey][arrIndex];
+					current = (current[arrKey] as unknown[])[arrIndex] as NestedObject;
 				}
 			} else if (i === parts.length - 1) {
-				current[part] = value;
+				(current as Record<string, unknown>)[part] = value;
 			} else {
-				if (!current[part]) {
-					current[part] = {};
+				if (!(current as Record<string, unknown>)[part]) {
+					(current as Record<string, unknown>)[part] = {};
 				}
-				current = current[part];
+				current = (current as Record<string, unknown>)[part] as NestedObject;
 			}
 		});
 	});

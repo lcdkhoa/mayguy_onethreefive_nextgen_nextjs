@@ -4,10 +4,11 @@ import * as _ from 'lodash';
 interface JsonSchema {
 	required: string[];
 	type: string;
-	properties: Record<string, any>;
+	properties: Record<string, unknown>;
+	title?: string;
 }
 
-const OthersConverter = (key: string, value: any) => {
+const OthersConverter = (key: string, value: unknown) => {
 	const data = {
 		type: typeof value,
 		example: value,
@@ -20,26 +21,21 @@ const OthersConverter = (key: string, value: any) => {
 };
 
 function convertJson(jsonData: object): JsonSchema {
-	let result: JsonSchema = {
+	const result: JsonSchema = {
 		required: Object.keys(jsonData),
 		type: 'object',
 		properties: {},
 	};
 
 	Object.entries(jsonData).forEach(([key, value]) => {
-		if (
-			typeof value === 'object' &&
-			value !== null &&
-			Object.keys(value).length !== 0 &&
-			!Array.isArray(value)
-		) {
+		if (typeof value === 'object' && value !== null && Object.keys(value).length !== 0 && !Array.isArray(value)) {
 			result.properties[key] = convertJson(value);
 		} else if (Array.isArray(value)) {
 			result.properties[key] = {
 				type: 'array',
 				items: {
 					anyOf: value.map((element, index) => {
-						const data: any = convertJson(element);
+						const data: JsonSchema = convertJson(element);
 						data.title = 'Object ' + index;
 						return data;
 					}),
@@ -54,16 +50,16 @@ function convertJson(jsonData: object): JsonSchema {
 }
 
 export function ConvertJsonToYaml(
-	jsonRequest: Object,
-	jsonResponse: Object,
-	inputUrl: String,
-	inputTitle: String,
-	inputDescription: String,
-	inputVersion: String,
-	inputMethod: String,
-	inputPath: any,
-	jsonInputBadError: Object,
-	jsonInputInternalError: Object
+	jsonRequest: object,
+	jsonResponse: object,
+	inputUrl: string,
+	inputTitle: string,
+	inputDescription: string,
+	inputVersion: string,
+	inputMethod: string,
+	inputPath: string,
+	jsonInputBadError: object,
+	jsonInputInternalError: object
 ) {
 	const body = {
 		openapi: '3.0.1',
@@ -137,12 +133,8 @@ export function ConvertJsonToYaml(
 			schemas: {
 				InputSchema: convertJson(jsonRequest),
 				OutputSchema: convertJson(jsonResponse),
-				BadRequestSchema: _.isEmpty(jsonInputBadError)
-					? {}
-					: convertJson(jsonInputBadError),
-				InternalErrorSchema: _.isEmpty(jsonInputInternalError)
-					? {}
-					: convertJson(jsonInputInternalError),
+				BadRequestSchema: _.isEmpty(jsonInputBadError) ? {} : convertJson(jsonInputBadError),
+				InternalErrorSchema: _.isEmpty(jsonInputInternalError) ? {} : convertJson(jsonInputInternalError),
 			},
 		},
 	};

@@ -4,7 +4,7 @@ import { IconButton, Menu, MenuItem } from '@mui/material';
 interface OptionPopoverProps {
 	id: string;
 	openOption: boolean;
-	toolbarOptionsAnchorEl: any;
+	toolbarOptionsAnchorEl: HTMLElement | null;
 	handleClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
 	handleCloseOption: () => void;
 	handleChange: (value: string) => void;
@@ -25,12 +25,7 @@ const OptionPopover = ({
 	};
 	return (
 		<div title="Options">
-			<IconButton
-				edge="start"
-				color="inherit"
-				aria-label="menu"
-				onClick={handleClick}
-			>
+			<IconButton edge="start" color="inherit" aria-label="menu" onClick={handleClick}>
 				<TuneIcon />
 			</IconButton>
 			<Menu
@@ -47,12 +42,8 @@ const OptionPopover = ({
 					horizontal: 'center',
 				}}
 			>
-				<MenuItem onClick={() => handleChooseSplitter('_')}>
-					Split by underscore &quot;_&quot;
-				</MenuItem>
-				<MenuItem onClick={() => handleChooseSplitter('.')}>
-					Split by dot &quot;.&quot;
-				</MenuItem>
+				<MenuItem onClick={() => handleChooseSplitter('_')}>Split by underscore &quot;_&quot;</MenuItem>
+				<MenuItem onClick={() => handleChooseSplitter('.')}>Split by dot &quot;.&quot;</MenuItem>
 			</Menu>
 		</div>
 	);

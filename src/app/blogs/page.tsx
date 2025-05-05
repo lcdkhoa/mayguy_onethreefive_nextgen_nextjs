@@ -1,14 +1,6 @@
 'use client';
 
-import {
-	Button,
-	Card,
-	CardActions,
-	CardContent,
-	Container,
-	Typography,
-} from '@mui/material';
-import { Grid } from '@mui/material';
+import { Button, Card, CardActions, CardContent, Container, Grid, Typography } from '@mui/material';
 import Link from 'next/link';
 
 const blogPosts = [
@@ -48,11 +40,7 @@ export default function Blog() {
 								<Typography variant="body1">{post.excerpt}</Typography>
 							</CardContent>
 							<CardActions>
-								<Button
-									component={Link}
-									href={`/blogs/${post.slug}`}
-									size="small"
-								>
+								<Button component={Link} href={`/blogs/${post.slug}`} size="small">
 									Đọc thêm
 								</Button>
 							</CardActions>

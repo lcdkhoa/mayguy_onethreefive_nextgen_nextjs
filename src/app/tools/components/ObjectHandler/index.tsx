@@ -68,6 +68,7 @@ export default function ObjectHandler({ ...props }: ObjectHandlerProps) {
 			const flatJson = JSON.stringify(FlattenObjects(obj), null, 2);
 			setText(flatJson);
 		} catch (error) {
+			console.error(error);
 			setText('Invalid JSON input.');
 		}
 	};
@@ -78,6 +79,7 @@ export default function ObjectHandler({ ...props }: ObjectHandlerProps) {
 			const unflattenJson = JSON.stringify(UnflattenObjects(obj, '_'), null, 2);
 			setText(unflattenJson);
 		} catch (error) {
+			console.error(error);
 			setText('Invalid JSON input.');
 		}
 	};
@@ -100,25 +102,11 @@ export default function ObjectHandler({ ...props }: ObjectHandlerProps) {
 					<MonacoEditorWrapper value={text} onChange={handleOnchange} />
 				</DialogContent>
 				<Divider />
-				<Grid
-					container
-					direction={'row'}
-					justifyContent={'center'}
-					paddingBottom={2}
-					paddingTop={2}
-				>
-					<HandlerButton onClick={() => handleUnflatten()}>
-						Convert to Nested
-					</HandlerButton>
-					<HandlerButton onClick={() => handleFlatten()}>
-						Convert to Flat
-					</HandlerButton>
-					<HandlerButton onClick={() => handleAddInput()}>
-						{inputText}
-					</HandlerButton>
-					<HandlerButton onClick={() => handleAddOutput()}>
-						{outputText}
-					</HandlerButton>
+				<Grid container direction={'row'} justifyContent={'center'} paddingBottom={2} paddingTop={2}>
+					<HandlerButton onClick={() => handleUnflatten()}>Convert to Nested</HandlerButton>
+					<HandlerButton onClick={() => handleFlatten()}>Convert to Flat</HandlerButton>
+					<HandlerButton onClick={() => handleAddInput()}>{inputText}</HandlerButton>
+					<HandlerButton onClick={() => handleAddOutput()}>{outputText}</HandlerButton>
 					<HandlerButton onClick={handleClose}>Close</HandlerButton>
 				</Grid>
 			</Dialog>
