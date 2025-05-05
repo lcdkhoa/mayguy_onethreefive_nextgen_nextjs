@@ -11,8 +11,6 @@ export const usePageTitle = () => {
 		const matched = sections.find((section) => section.path === pathname);
 		if (matched) {
 			document.title = matched.webTitle;
-		} else {
-			document.title = 'Dang Khoa 🔅';
 		}
 	}, [pathname]);
 };
