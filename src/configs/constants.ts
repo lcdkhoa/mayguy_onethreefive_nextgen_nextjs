@@ -21,7 +21,7 @@ export const sections: Section[] = [
 		width: '10%',
 		path: '/blogs',
 		iconsURL: '/images/icons/notes.png',
-		webTitle: 'Dang Khoa 🔅 Notes',
+		webTitle: 'Dang Khoa 🔅 Blogs',
 		isSelected: false,
 	},
 	{

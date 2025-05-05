@@ -1,17 +1,10 @@
+'use client';
+
 import HandlerButton from '@/components/HandlerButton';
 import MonacoEditorWrapper from '@/components/MonacoEditor';
 import { ConvertJsonToYaml } from '@/utils/swagger-creator';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import {
-	Dialog,
-	DialogContent,
-	Divider,
-	Grid,
-	MenuItem,
-	TextField,
-	Typography,
-	styled,
-} from '@mui/material';
+import { Dialog, DialogContent, Divider, Grid, MenuItem, TextField, Typography, styled } from '@mui/material';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import { useForm } from 'react-hook-form';
@@ -73,9 +66,7 @@ export default function SwaggerCreator({ ...props }: SwaggerCreatorProps) {
 		const inputMethod = getValues('api_method');
 		const inputPath = getValues('api_path');
 		const jsonInputBadError = JSON.parse(getValues('api_bad_error_schema'));
-		const jsonInputInternalError = JSON.parse(
-			getValues('api_network_error_schema')
-		);
+		const jsonInputInternalError = JSON.parse(getValues('api_network_error_schema'));
 		const yamlData = ConvertJsonToYaml(
 			jsonRequest,
 			jsonResponse,
@@ -157,17 +148,10 @@ export default function SwaggerCreator({ ...props }: SwaggerCreatorProps) {
 										id={tool.id + '_text'}
 										name={tool.name}
 										select={tool.hasDropdown}
-										value={
-											getValues(tool.name as keyof SwaggerFormValues) || ''
-										}
+										value={getValues(tool.name as keyof SwaggerFormValues) || ''}
 										placeholder={tool.textHolder}
 										fullWidth
-										onChange={(e) =>
-											setValue(
-												tool.name as keyof SwaggerFormValues,
-												e.target.value
-											)
-										}
+										onChange={(e) => setValue(tool.name as keyof SwaggerFormValues, e.target.value)}
 									>
 										{tool.hasDropdown &&
 											tool.dropdownValue.map((option) => (
@@ -182,13 +166,7 @@ export default function SwaggerCreator({ ...props }: SwaggerCreatorProps) {
 					))}
 				</DialogContent>
 				<Divider />
-				<Grid
-					container
-					direction={'row'}
-					justifyContent={'center'}
-					paddingBottom={2}
-					paddingTop={2}
-				>
+				<Grid container direction={'row'} justifyContent={'center'} paddingBottom={2} paddingTop={2}>
 					<HandlerButton type="submit" onClick={handleSubmit}>
 						Create Swagger
 					</HandlerButton>

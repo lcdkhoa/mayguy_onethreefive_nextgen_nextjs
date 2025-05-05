@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 const blogPosts = [
@@ -15,10 +16,26 @@ const blogPosts = [
 	},
 ];
 
-type Params = Promise<{ slug: string }>;
+type Params = Promise<{ slug: string; title: string }>;
 
 export async function generateStaticParams() {
 	return blogPosts.map((post) => ({ slug: post.slug }));
+}
+
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+	const { slug } = await params;
+	const post = blogPosts.find((p) => p.slug === slug);
+
+	if (!post) {
+		return {
+			title: 'Not Found',
+		};
+	}
+
+	return {
+		title: `${post.title}`,
+		description: `Article about ${post.title}`,
+	};
 }
 
 export default async function Page({ params }: { params: Params }) {

@@ -1,10 +1,9 @@
+'use client';
+
 import HandlerButton from '@/components/HandlerButton';
 import MonacoEditorWrapper from '@/components/MonacoEditor';
 // import { FlattenObjects, UnFlatObjects } from '@lcdkhoa/object-handler';
-import {
-	FlattenObjects,
-	UnFlatObjects,
-} from '@/utils/object-handler-playground';
+import { FlattenObjects, UnFlatObjects } from '@/utils/object-handler-playground';
 import { Dialog, DialogContent, Divider, Grid } from '@mui/material';
 import { useState } from 'react';
 
@@ -20,8 +19,7 @@ export default function ObjectHandler({ ...props }: ObjectHandlerProps) {
 	const { open, close, index } = props;
 	const [text, setText] = useState('');
 
-	const [toolbarOptionsAnchorEl, setToolbarOptionsAnchorEl] =
-		useState<HTMLButtonElement | null>(null);
+	const [toolbarOptionsAnchorEl, setToolbarOptionsAnchorEl] = useState<HTMLButtonElement | null>(null);
 
 	const [splitter, setSelectedSplitter] = useState('_');
 
@@ -83,13 +81,7 @@ export default function ObjectHandler({ ...props }: ObjectHandlerProps) {
 					<MonacoEditorWrapper value={text} onChange={handleOnchange} />
 				</DialogContent>
 				<Divider />
-				<Grid
-					container
-					direction={'row'}
-					justifyContent={'center'}
-					paddingBottom={2}
-					paddingTop={2}
-				>
+				<Grid container direction={'row'} justifyContent={'center'} paddingBottom={2} paddingTop={2}>
 					<OptionPopover
 						id={id}
 						openOption={openOption}
@@ -99,12 +91,8 @@ export default function ObjectHandler({ ...props }: ObjectHandlerProps) {
 						handleChange={handleChange}
 						splitter={splitter}
 					/>
-					<HandlerButton onClick={() => handleUnFlat()}>
-						Convert to Nested
-					</HandlerButton>
-					<HandlerButton onClick={() => handleFlatten()}>
-						Convert to Flat
-					</HandlerButton>
+					<HandlerButton onClick={() => handleUnFlat()}>Convert to Nested</HandlerButton>
+					<HandlerButton onClick={() => handleFlatten()}>Convert to Flat</HandlerButton>
 
 					<HandlerButton onClick={handleClose}>Close</HandlerButton>
 				</Grid>

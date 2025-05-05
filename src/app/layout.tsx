@@ -1,5 +1,6 @@
 'use client';
 
+import ClientWrapper from '@/components/ClientWrapper';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import ThemeRegistry from '@/components/ThemeRegistry';
@@ -9,13 +10,12 @@ import '@/styles/css/fonts.css';
 import '@/styles/css/index.css';
 import { Grid } from '@mui/material';
 
-export default function RootLayout({
-	children,
-}: {
-	children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="en">
+			<head>
+				<link rel="icon" href="/icon.ico" />
+			</head>
 			<body>
 				<ThemeProvider>
 					<ThemeRegistry>
@@ -33,7 +33,7 @@ export default function RootLayout({
 									<Header />
 								</Grid>
 								<Grid key="content-container" sx={{ flex: 1 }}>
-									{children}
+									<ClientWrapper>{children}</ClientWrapper>
 								</Grid>
 								<Grid key="footer-container">
 									<Footer />
