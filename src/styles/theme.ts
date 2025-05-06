@@ -2,8 +2,7 @@ import { ThemeOptions, createTheme } from '@mui/material/styles';
 
 import { color } from './color';
 
-interface TypographyVariant
-	extends Record<string, string | number | undefined> {
+interface TypographyVariant extends Record<string, string | number | undefined> {
 	fontFamily: string;
 	fontSize: string;
 	fontWeight: number;
@@ -17,7 +16,6 @@ interface TypographyConfig {
 	h3: TypographyVariant;
 	h4: TypographyVariant;
 	h5: TypographyVariant;
-	h6: TypographyVariant;
 	body1: TypographyVariant;
 	body2: TypographyVariant;
 	subtitle1: TypographyVariant;
@@ -52,11 +50,6 @@ const typographyConfig: TypographyConfig = {
 	h5: {
 		fontFamily: PLAYFAIR_FONT_FAMILY,
 		fontSize: '1.25rem',
-		fontWeight: 700,
-	},
-	h6: {
-		fontFamily: PLAYFAIR_FONT_FAMILY,
-		fontSize: '1rem',
 		fontWeight: 700,
 	},
 	body1: {
