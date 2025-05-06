@@ -42,7 +42,9 @@ const OptionPopover = ({
 					horizontal: 'center',
 				}}
 			>
-				<MenuItem onClick={() => handleChooseSplitter('_')}>Split by underscore &quot;_&quot;</MenuItem>
+				<MenuItem onClick={() => handleChooseSplitter('_')}>
+					Split by underscore &quot;_&quot;
+				</MenuItem>
 				<MenuItem onClick={() => handleChooseSplitter('.')}>Split by dot &quot;.&quot;</MenuItem>
 			</Menu>
 		</div>

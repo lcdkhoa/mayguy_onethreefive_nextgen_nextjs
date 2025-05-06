@@ -28,7 +28,12 @@ function convertJson(jsonData: object): JsonSchema {
 	};
 
 	Object.entries(jsonData).forEach(([key, value]) => {
-		if (typeof value === 'object' && value !== null && Object.keys(value).length !== 0 && !Array.isArray(value)) {
+		if (
+			typeof value === 'object' &&
+			value !== null &&
+			Object.keys(value).length !== 0 &&
+			!Array.isArray(value)
+		) {
 			result.properties[key] = convertJson(value);
 		} else if (Array.isArray(value)) {
 			result.properties[key] = {
@@ -134,7 +139,9 @@ export function ConvertJsonToYaml(
 				InputSchema: convertJson(jsonRequest),
 				OutputSchema: convertJson(jsonResponse),
 				BadRequestSchema: _.isEmpty(jsonInputBadError) ? {} : convertJson(jsonInputBadError),
-				InternalErrorSchema: _.isEmpty(jsonInputInternalError) ? {} : convertJson(jsonInputInternalError),
+				InternalErrorSchema: _.isEmpty(jsonInputInternalError)
+					? {}
+					: convertJson(jsonInputInternalError),
 			},
 		},
 	};

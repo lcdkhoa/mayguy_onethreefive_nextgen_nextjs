@@ -8,7 +8,12 @@ interface ButtonWithLinkProps extends IconButtonProps {
 	onTarget?: boolean;
 }
 
-export default function ButtonWithLink({ url, children, onTarget = true, ...props }: ButtonWithLinkProps) {
+export default function ButtonWithLink({
+	url,
+	children,
+	onTarget = true,
+	...props
+}: ButtonWithLinkProps) {
 	return (
 		<IconButton
 			sx={{

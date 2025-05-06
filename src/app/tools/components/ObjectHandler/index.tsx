@@ -102,7 +102,13 @@ export default function ObjectHandler({ ...props }: ObjectHandlerProps) {
 					<MonacoEditorWrapper value={text} onChange={handleOnchange} />
 				</DialogContent>
 				<Divider />
-				<Grid container direction={'row'} justifyContent={'center'} paddingBottom={2} paddingTop={2}>
+				<Grid
+					container
+					direction={'row'}
+					justifyContent={'center'}
+					paddingBottom={2}
+					paddingTop={2}
+				>
 					<HandlerButton onClick={() => handleUnflatten()}>Convert to Nested</HandlerButton>
 					<HandlerButton onClick={() => handleFlatten()}>Convert to Flat</HandlerButton>
 					<HandlerButton onClick={() => handleAddInput()}>{inputText}</HandlerButton>

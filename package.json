@@ -1,41 +1,41 @@
 {
-  "name": "mayguy_onethreefive_nextgen_nextjs",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next",
-    "build": "next build",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "next start",
-    "format": "prettier --write ."
-  },
-  "dependencies": {
-    "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.0",
-    "@lcdkhoa/object-handler": "^1.0.2",
-    "@monaco-editor/react": "^4.7.0",
-    "@mui/icons-material": "^7.0.2",
-    "@mui/material": "^7.0.2",
-    "js-yaml": "^4.1.0",
-    "lodash": "^4.17.21",
-    "next": "15.3.1",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "react-ga4": "^2.1.0",
-    "react-hook-form": "^7.56.2"
-  },
-  "devDependencies": {
-    "@eslint/eslintrc": "^3",
-    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
-    "@types/js-yaml": "^4.0.9",
-    "@types/lodash": "^4.17.16",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "@vitejs/plugin-react": "^4.4.1",
-    "eslint": "^9",
-    "eslint-config-next": "15.3.1",
-    "typescript": "^5",
-    "vite": "^6.3.4"
-  }
+	"name": "mayguy_onethreefive_nextgen_nextjs",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next",
+		"build": "next build",
+		"lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+		"preview": "next start",
+		"format": "prettier --write ."
+	},
+	"dependencies": {
+		"@emotion/react": "^11.14.0",
+		"@emotion/styled": "^11.14.0",
+		"@lcdkhoa/object-handler": "^1.0.2",
+		"@monaco-editor/react": "^4.7.0",
+		"@mui/icons-material": "^7.0.2",
+		"@mui/material": "^7.0.2",
+		"js-yaml": "^4.1.0",
+		"lodash": "^4.17.21",
+		"next": "15.3.1",
+		"react": "^19.0.0",
+		"react-dom": "^19.0.0",
+		"react-ga4": "^2.1.0",
+		"react-hook-form": "^7.56.2"
+	},
+	"devDependencies": {
+		"@eslint/eslintrc": "^3",
+		"@trivago/prettier-plugin-sort-imports": "^5.2.2",
+		"@types/js-yaml": "^4.0.9",
+		"@types/lodash": "^4.17.16",
+		"@types/node": "^20",
+		"@types/react": "^19",
+		"@types/react-dom": "^19",
+		"@vitejs/plugin-react": "^4.4.1",
+		"eslint": "^9",
+		"eslint-config-next": "15.3.1",
+		"typescript": "^5",
+		"vite": "^6.3.4"
+	}
 }

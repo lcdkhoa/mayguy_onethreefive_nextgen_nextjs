@@ -4,7 +4,16 @@ import HandlerButton from '@/components/HandlerButton';
 import MonacoEditorWrapper from '@/components/MonacoEditor';
 import { ConvertJsonToYaml } from '@/utils/swagger-creator';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { Dialog, DialogContent, Divider, Grid, MenuItem, TextField, Typography, styled } from '@mui/material';
+import {
+	Dialog,
+	DialogContent,
+	Divider,
+	Grid,
+	MenuItem,
+	TextField,
+	Typography,
+	styled,
+} from '@mui/material';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import { useForm } from 'react-hook-form';
@@ -166,7 +175,13 @@ export default function SwaggerCreator({ ...props }: SwaggerCreatorProps) {
 					))}
 				</DialogContent>
 				<Divider />
-				<Grid container direction={'row'} justifyContent={'center'} paddingBottom={2} paddingTop={2}>
+				<Grid
+					container
+					direction={'row'}
+					justifyContent={'center'}
+					paddingBottom={2}
+					paddingTop={2}
+				>
 					<HandlerButton type="submit" onClick={handleSubmit}>
 						Create Swagger
 					</HandlerButton>

@@ -12,11 +12,7 @@ const DeviceContext = createContext<DeviceContextType | undefined>(undefined);
 export const DeviceProvider = ({ children }: { children: ReactNode }) => {
 	const isMobile = useMediaQuery('(max-width: 900px)');
 
-	return (
-		<DeviceContext.Provider value={{ isMobile }}>
-			{children}
-		</DeviceContext.Provider>
-	);
+	return <DeviceContext.Provider value={{ isMobile }}>{children}</DeviceContext.Provider>;
 };
 
 export const useDevice = () => {

@@ -2,7 +2,8 @@ export const ABOUT_SPACE = 'About me';
 export const ABOUT_ME_FIRST = 'Hi, I am Dang Khoa, call me Charlie for short.';
 export const ABOUT_ME_SECOND_PREFIX = 'I am a full-stack developer at';
 export const ABOUT_ME_SECOND_LINK_TEXT = '360F';
-export const ABOUT_ME_SECOND_SUFFIX = 'with a passion for building large, stable, and efficient systems.';
+export const ABOUT_ME_SECOND_SUFFIX =
+	'with a passion for building large, stable, and efficient systems.';
 export const ABOUT_ME_THIRD =
 	'This is my little corner of the internet where I share my experiences, random thoughts, and stories about work and life.';
 export const ABOUT_ME_FOURTH = 'You will also find some small apps I have built along the way.';

@@ -47,7 +47,8 @@ const Header = () => {
 		<Toolbar
 			sx={{
 				gap: 3,
-				backgroundColor: theme === 'light' ? color.light.background.header : color.dark.background.header,
+				backgroundColor:
+					theme === 'light' ? color.light.background.header : color.dark.background.header,
 				position: 'relative',
 				minHeight: 64,
 			}}

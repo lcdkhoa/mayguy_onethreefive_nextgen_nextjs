@@ -32,15 +32,28 @@ export default function Tools() {
 	}, [tools]);
 
 	const handleOpen = (index: number) => {
-		setTools(tools.map((tool, i) => (i === index ? { ...tool, isSelected: true } : { ...tool, isSelected: false })));
+		setTools(
+			tools.map((tool, i) =>
+				i === index ? { ...tool, isSelected: true } : { ...tool, isSelected: false }
+			)
+		);
 	};
 
 	const handleClose = (index: number) => {
-		setTools(tools.map((tool, i) => (i === index ? { ...tool, isSelected: false } : { ...tool, isSelected: false })));
+		setTools(
+			tools.map((tool, i) =>
+				i === index ? { ...tool, isSelected: false } : { ...tool, isSelected: false }
+			)
+		);
 	};
 
 	return (
-		<Grid container alignContent={'center'} justifyContent={'center'}>
+		<Grid
+			container
+			alignContent={'center'}
+			justifyContent={'center'}
+			sx={{ overflow: 'hidden', display: 'flex', flexDirection: 'row', height: '100%' }}
+		>
 			{tools.map((tool, index) => (
 				<Fragment key={index}>
 					<tool.component open={tool.isSelected} close={handleClose} index={index} />

@@ -1,15 +1,18 @@
 'use client';
 
 import { useDevice } from '@/contexts/DeviceContext';
-import { Grid, Typography, useTheme } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import Image from 'next/image';
 
 export default function Home() {
 	const { isMobile } = useDevice();
-	const theme = useTheme();
 	return (
-		<Grid container justifyContent={'center'} sx={{ overflow: 'hidden' }}>
-			<Grid container justifyContent={'center'} alignContent={'center'}>
+		<Grid
+			container
+			justifyContent={'center'}
+			sx={{ overflow: 'hidden', display: 'flex', flexDirection: 'row', height: '100%' }}
+		>
+			<Grid alignContent={'center'}>
 				<Image
 					src="/images/backgrounds/under_construction.png"
 					alt="Under Construction"
@@ -22,9 +25,11 @@ export default function Home() {
 					className={`zoom-in`}
 				/>
 			</Grid>
-			<Typography variant={!isMobile ? 'h2' : 'body1'} color={theme.palette.text.primary}>
-				WELCOME TO MY HOME
-			</Typography>
+			<Grid alignContent={'center'}>
+				<Typography variant={!isMobile ? 'h3' : 'body1'} color="primary">
+					WELCOME TO MY CORNER
+				</Typography>
+			</Grid>
 		</Grid>
 	);
 }

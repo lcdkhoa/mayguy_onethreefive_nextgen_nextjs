@@ -19,7 +19,9 @@ export default function ObjectHandler({ ...props }: ObjectHandlerProps) {
 	const { open, close, index } = props;
 	const [text, setText] = useState('');
 
-	const [toolbarOptionsAnchorEl, setToolbarOptionsAnchorEl] = useState<HTMLButtonElement | null>(null);
+	const [toolbarOptionsAnchorEl, setToolbarOptionsAnchorEl] = useState<HTMLButtonElement | null>(
+		null
+	);
 
 	const [splitter, setSelectedSplitter] = useState('_');
 
@@ -81,7 +83,13 @@ export default function ObjectHandler({ ...props }: ObjectHandlerProps) {
 					<MonacoEditorWrapper value={text} onChange={handleOnchange} />
 				</DialogContent>
 				<Divider />
-				<Grid container direction={'row'} justifyContent={'center'} paddingBottom={2} paddingTop={2}>
+				<Grid
+					container
+					direction={'row'}
+					justifyContent={'center'}
+					paddingBottom={2}
+					paddingTop={2}
+				>
 					<OptionPopover
 						id={id}
 						openOption={openOption}

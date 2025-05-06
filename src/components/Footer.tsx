@@ -10,7 +10,9 @@ const Footer = () => {
 				py: 1,
 				px: 2,
 				backgroundColor: (theme) =>
-					theme.palette.mode === 'light' ? color.light.background.footer : color.dark.background.footer,
+					theme.palette.mode === 'light'
+						? color.light.background.footer
+						: color.dark.background.footer,
 				display: 'flex',
 				justifyContent: 'center',
 				alignItems: 'center',

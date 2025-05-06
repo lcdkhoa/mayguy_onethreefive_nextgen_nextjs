@@ -2,7 +2,7 @@
 
 import ButtonWithLink from '@/components/Buttons/ButtonWithLink';
 import { GitHub, LinkedIn } from '@mui/icons-material';
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 
 import {
 	ABOUT_ME_FIFTH,
@@ -20,8 +20,13 @@ import {
 
 export default function About() {
 	return (
-		<Container maxWidth="lg">
-			<Box sx={{ my: 4 }}>
+		<Grid
+			justifyContent={'center'}
+			alignContent={'center'}
+			sx={{ overflow: 'hidden', display: 'flex', flexDirection: 'row', height: '100%' }}
+			mt={10}
+		>
+			<Box>
 				<Typography variant="h3" gutterBottom color="primary">
 					{ABOUT_SPACE}
 				</Typography>
@@ -58,6 +63,6 @@ export default function About() {
 					</ButtonWithLink>
 				</span>
 			</Box>
-		</Container>
+		</Grid>
 	);
 }

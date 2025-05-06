@@ -20,7 +20,8 @@ function RootLayoutContent({ children }: { children: React.ReactNode }) {
 			</head>
 			<body
 				style={{
-					backgroundColor: theme === 'light' ? color.light.background.body : color.dark.background.body,
+					backgroundColor:
+						theme === 'light' ? color.light.background.body : color.dark.background.body,
 				}}
 			>
 				<ThemeRegistry>

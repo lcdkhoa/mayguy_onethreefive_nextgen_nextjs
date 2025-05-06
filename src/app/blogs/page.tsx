@@ -1,32 +1,38 @@
 'use client';
 
-import { Button, Card, CardActions, CardContent, Container, Grid, Typography } from '@mui/material';
-import Link from 'next/link';
+import { Grid, Typography } from '@mui/material';
 
-const blogPosts = [
-	{
-		id: 1,
-		title: 'Bài viết đầu tiên',
-		excerpt: 'Đây là đoạn trích của bài viết đầu tiên...',
-		date: '2024-03-20',
-		slug: 'bai-viet-dau-tien',
-	},
-	{
-		id: 2,
-		title: 'Bài viết thứ hai',
-		excerpt: 'Đây là đoạn trích của bài viết thứ hai...',
-		date: '2024-03-21',
-		slug: 'bai-viet-thu-hai',
-	},
-];
+// import Link from 'next/link';
+
+// const blogPosts = [
+// 	{
+// 		id: 1,
+// 		title: 'Bài viết đầu tiên',
+// 		excerpt: 'Đây là đoạn trích của bài viết đầu tiên...',
+// 		date: '2024-03-20',
+// 		slug: 'bai-viet-dau-tien',
+// 	},
+// 	{
+// 		id: 2,
+// 		title: 'Bài viết thứ hai',
+// 		excerpt: 'Đây là đoạn trích của bài viết thứ hai...',
+// 		date: '2024-03-21',
+// 		slug: 'bai-viet-thu-hai',
+// 	},
+// ];
 
 export default function Blog() {
 	return (
-		<Container maxWidth="lg" sx={{ py: 4 }}>
+		<Grid
+			justifyContent={'center'}
+			alignContent={'center'}
+			sx={{ display: 'flex', height: '100%' }}
+			mt={10}
+		>
 			<Typography variant="h2" component="h1" gutterBottom>
-				Blog
+				Building Blog Section
 			</Typography>
-			<Grid container spacing={3}>
+			{/* <Grid container spacing={3}>
 				{blogPosts.map((post) => (
 					<Grid key={post.id}>
 						<Card>
@@ -47,7 +53,7 @@ export default function Blog() {
 						</Card>
 					</Grid>
 				))}
-			</Grid>
-		</Container>
+			</Grid> */}
+		</Grid>
 	);
 }
