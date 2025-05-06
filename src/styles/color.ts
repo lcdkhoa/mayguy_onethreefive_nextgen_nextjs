@@ -31,6 +31,9 @@ export const color = {
 			primary: '#1A202C',
 			secondary: '#4A5568',
 		},
+		card: {
+			shadow: '#000000',
+		},
 	},
 	dark: {
 		primary: {
@@ -61,6 +64,9 @@ export const color = {
 		text: {
 			primary: '#F7FAFC',
 			secondary: '#CBD5E0',
+		},
+		card: {
+			shadow: '#FFFFFF',
 		},
 	},
 };

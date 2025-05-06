@@ -23,7 +23,7 @@ export default function About() {
 		<Grid
 			justifyContent={'center'}
 			alignContent={'center'}
-			sx={{ overflow: 'hidden', display: 'flex', flexDirection: 'row', height: '100%' }}
+			sx={{ overflow: 'hidden', display: 'flex', flexDirection: 'row' }}
 			mt={10}
 		>
 			<Box>

@@ -23,6 +23,8 @@ export const ToolCardList = [
 		component: ObjectHandler,
 		path: '/tools/object-handler',
 		isSelected: false,
+		version: 'v1.0.0',
+		category: 'Tools',
 	},
 	{
 		id: 2,
@@ -33,6 +35,8 @@ export const ToolCardList = [
 		component: SwaggerCreator,
 		path: '/tools/swagger-creator',
 		isSelected: false,
+		version: 'v1.0.0',
+		category: 'Tools',
 	},
 	{
 		id: 1,
@@ -43,6 +47,8 @@ export const ToolCardList = [
 		component: ObjectHandlerPlayGround,
 		path: '/tools/object-handler',
 		isSelected: false,
+		version: 'v1.0.2',
+		category: 'Tools',
 	},
 ];
 

@@ -1,5 +1,6 @@
 'use client';
 
+import { useTheme } from '@/contexts/ThemeContext';
 import MonacoEditor, { OnChange } from '@monaco-editor/react';
 
 const defaultOptions = {
@@ -14,7 +15,6 @@ const defaultOptions = {
 
 interface MonacoEditorWrapperProps {
 	height?: string;
-	theme?: string;
 	language?: string;
 	value: string;
 	onChange: OnChange;
@@ -23,17 +23,17 @@ interface MonacoEditorWrapperProps {
 
 const MonacoEditorWrapper: React.FC<MonacoEditorWrapperProps> = ({
 	height = '60vh',
-	theme = 'vs-light',
 	language = 'json',
 	value,
 	onChange,
 	options = {},
 	...props
 }) => {
+	const { theme } = useTheme();
 	return (
 		<MonacoEditor
 			height={height}
-			theme={theme}
+			theme={theme === 'light' ? 'vs-light' : 'vs-dark'}
 			defaultLanguage={language}
 			value={value}
 			onChange={onChange}
