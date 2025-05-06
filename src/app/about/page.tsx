@@ -22,7 +22,7 @@ export default function About() {
 	return (
 		<Container maxWidth="lg">
 			<Box sx={{ my: 4 }}>
-				<Typography variant="h3" gutterBottom>
+				<Typography variant="h3" gutterBottom color="primary">
 					{ABOUT_SPACE}
 				</Typography>
 				<Typography variant="body1">{ABOUT_ME_FIRST}</Typography>
