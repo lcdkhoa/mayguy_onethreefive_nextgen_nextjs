@@ -23,6 +23,9 @@ export const color = {
 		background: {
 			default: '#FFFFFF',
 			paper: '#F7FAFC',
+			body: '#F2F7FE',
+			header: '#FAFDFF',
+			footer: '#EEEEEE',
 		},
 		text: {
 			primary: '#1A202C',
@@ -51,6 +54,9 @@ export const color = {
 		background: {
 			default: '#1A202C',
 			paper: '#2D3748',
+			body: '#1E293B',
+			header: '#141C30',
+			footer: '#424242',
 		},
 		text: {
 			primary: '#F7FAFC',

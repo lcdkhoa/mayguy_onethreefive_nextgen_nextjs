@@ -83,23 +83,6 @@ const createCustomTheme = (mode: 'light' | 'dark'): ThemeOptions => ({
 		...(mode === 'light' ? color.light : color.dark),
 	},
 	typography: typographyConfig,
-	components: {
-		MuiButton: {
-			styleOverrides: {
-				root: {
-					textTransform: 'none',
-					fontFamily: MONT_FONT_FAMILY,
-				},
-			},
-		},
-		MuiTypography: {
-			styleOverrides: {
-				root: {
-					fontFamily: MONT_FONT_FAMILY,
-				},
-			},
-		},
-	},
 });
 
 export const lightTheme = createTheme(createCustomTheme('light'));

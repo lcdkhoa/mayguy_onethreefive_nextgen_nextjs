@@ -32,38 +32,23 @@ export default function Tools() {
 	}, [tools]);
 
 	const handleOpen = (index: number) => {
-		setTools(
-			tools.map((tool, i) =>
-				i === index
-					? { ...tool, isSelected: true }
-					: { ...tool, isSelected: false }
-			)
-		);
+		setTools(tools.map((tool, i) => (i === index ? { ...tool, isSelected: true } : { ...tool, isSelected: false })));
 	};
 
 	const handleClose = (index: number) => {
-		setTools(
-			tools.map((tool, i) =>
-				i === index
-					? { ...tool, isSelected: false }
-					: { ...tool, isSelected: false }
-			)
-		);
+		setTools(tools.map((tool, i) => (i === index ? { ...tool, isSelected: false } : { ...tool, isSelected: false })));
 	};
 
 	return (
 		<Grid container alignContent={'center'} justifyContent={'center'}>
 			{tools.map((tool, index) => (
-				<Fragment key={tool.id}>
-					<tool.component
-						open={tool.isSelected}
-						close={handleClose}
-						index={index}
-					/>
+				<Fragment key={index}>
+					<tool.component open={tool.isSelected} close={handleClose} index={index} />
 					<Card
 						sx={{
 							width: 400,
 							height: 300,
+							borderRadius: '20px',
 							transition: 'transform 0.2s ease-in-out',
 							'&:hover': {
 								transform: 'scale(1.05)',
@@ -71,22 +56,12 @@ export default function Tools() {
 							},
 							margin: '10px',
 						}}
-						key={tool.id}
 						onClick={() => handleOpen(index)}
 					>
 						<CardHeader title={tool.title} />
-						<CardMedia
-							component="img"
-							height="150"
-							image={tool.imageUrl}
-							alt={tool.title}
-						/>
+						<CardMedia component="img" height="150" image={tool.imageUrl} alt={tool.title} />
 						<CardContent>
-							<Typography
-								variant="body2"
-								color="text.secondary"
-								textAlign={'justify'}
-							>
+							<Typography variant="body2" color="text.secondary" textAlign={'justify'}>
 								{tool.description}
 							</Typography>
 						</CardContent>
