@@ -9,7 +9,6 @@ interface ButtonWithLinkProps extends IconButtonProps {
 }
 
 export default function ButtonWithLink({ url, children, onTarget = true, ...props }: ButtonWithLinkProps) {
-	console.log(props);
 	return (
 		<IconButton
 			sx={{
@@ -19,7 +18,7 @@ export default function ButtonWithLink({ url, children, onTarget = true, ...prop
 					background: '#e6eefc',
 				},
 				borderRadius: '12px',
-				p: 1.5,
+				p: 1.2,
 			}}
 			component={Link}
 			href={url}
