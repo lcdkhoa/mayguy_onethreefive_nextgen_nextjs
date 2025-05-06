@@ -10,7 +10,13 @@ export default function Home() {
 		<Grid
 			container
 			justifyContent={'center'}
-			sx={{ overflow: 'hidden', display: 'flex', flexDirection: 'row', height: '100%' }}
+			sx={{
+				overflow: 'hidden',
+				display: 'flex',
+				flexDirection: 'column',
+				alignItems: 'center',
+				height: '100%',
+			}}
 		>
 			<Grid alignContent={'center'}>
 				<Image
