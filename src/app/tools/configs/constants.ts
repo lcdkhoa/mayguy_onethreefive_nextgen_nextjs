@@ -21,7 +21,7 @@ export const ToolCardList = [
 			'Convert complex nested data structures into flat formats and vice versa, to enhance simplicity and efficiency in data management.',
 		imageUrl: '/images/cards/object_handler.png',
 		component: ObjectHandler,
-		path: '/tools/object-handler',
+		path: '/tools/object-handler-360f',
 		isSelected: false,
 		version: 'v1.0.0',
 		category: 'Tools',
