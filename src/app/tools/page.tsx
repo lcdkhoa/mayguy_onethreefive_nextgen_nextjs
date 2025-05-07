@@ -40,6 +40,10 @@ export default function Tools({ toolParam }: { toolParam?: string }) {
 		router.push('/tools');
 	};
 
+	const handleOpenTool = () => {
+		setIsLoading(true);
+	};
+
 	const handleFavorite = (toolPath: string) => {
 		let newFavs = [...favorites];
 		if (favorites.includes(toolPath)) {
@@ -153,7 +157,7 @@ export default function Tools({ toolParam }: { toolParam?: string }) {
 										</Grid>
 									}
 								/>
-								<Link href={tool.path} style={{ textDecoration: 'none' }}>
+								<Link href={tool.path} style={{ textDecoration: 'none' }} onClick={handleOpenTool}>
 									<Grid style={{ height: 250, overflow: 'hidden' }}>
 										<CardMedia
 											component="img"
