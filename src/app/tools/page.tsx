@@ -1,5 +1,6 @@
 'use client';
 
+import IconButton from '@/components/Buttons/IconButton';
 import { useTheme } from '@/contexts/ThemeContext';
 import { color } from '@/styles/color';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -12,7 +13,6 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
-import IconButton from '@mui/material/IconButton';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import Tooltip from '@mui/material/Tooltip';
@@ -106,13 +106,14 @@ export default function Tools({ toolParam }: { toolParam?: string }) {
 				{(tab === 0
 					? ToolCardList
 					: ToolCardList.filter((tool) => favorites.includes(tool.path))
-				).map((tool, index) => {
+				).map((tool) => {
 					const isSelected = tool.path.split('/').pop() === toolParam;
 					const isFavorite = favorites.includes(tool.path);
 					return (
-						<Grid key={index}>
-							{isSelected && <tool.component open={isSelected} close={handleClose} index={index} />}
-
+						<Grid key={tool.path}>
+							{isSelected && (
+								<tool.component open={isSelected} close={handleClose} index={tool.id} />
+							)}
 							<Card
 								sx={{
 									width: 500,
