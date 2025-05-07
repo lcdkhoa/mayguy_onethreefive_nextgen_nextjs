@@ -1,9 +1,10 @@
 import Tools from '../page';
 
 interface ToolPageProps {
-	params: { tool: string };
+	params: Promise<{ tool: string }>;
 }
 
-export default function ToolPage({ params }: ToolPageProps) {
-	return <Tools toolParam={params.tool} />;
+export default async function ToolPage({ params }: ToolPageProps) {
+	const { tool } = await params;
+	return <Tools toolParam={tool} />;
 }
