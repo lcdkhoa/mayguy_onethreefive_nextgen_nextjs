@@ -64,8 +64,12 @@ const Header = () => {
 			sx={{
 				gap: 3,
 				backgroundColor: color[theme].background.header,
-				position: 'relative',
+				position: 'sticky',
+				top: 0,
+				left: 0,
+				width: '100%',
 				minHeight: 64,
+				zIndex: 1100,
 			}}
 		>
 			<Fade in={pathname !== HOME} timeout={500}>

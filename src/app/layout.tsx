@@ -37,7 +37,7 @@ function RootLayoutContent({ children }: { children: React.ReactNode }) {
 							<Grid key="header-container">
 								<Header />
 							</Grid>
-							<Grid key="content-container" sx={{ flex: 1 }}>
+							<Grid key="content-container" sx={{ flex: 1, overflow: 'auto' }}>
 								<ClientWrapper>{children}</ClientWrapper>
 							</Grid>
 							<Grid key="footer-container">
