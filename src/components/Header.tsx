@@ -70,12 +70,18 @@ const Header = () => {
 				width: '100%',
 				minHeight: 64,
 				zIndex: 1100,
+				display: 'flex',
+				justifyContent: 'space-between',
 			}}
 		>
+			<Box sx={{ flex: 1 }} />
 			<Fade in={pathname !== HOME} timeout={500}>
 				<Box
 					sx={{
 						opacity: pathname === HOME ? 0 : 1,
+						position: 'absolute',
+						left: '50%',
+						transform: 'translateX(-50%)',
 					}}
 				>
 					<Link
@@ -97,57 +103,59 @@ const Header = () => {
 					</Link>
 				</Box>
 			</Fade>
-			<Box sx={{ flexGrow: 1 }} />
-			<Box sx={{ display: 'flex', position: 'relative', alignItems: 'center' }}>
-				<Box
-					sx={{
-						position: 'absolute',
-						left: `calc(${indicatorStyle.left}px + 25px)`,
-						bottom: 4,
-						width: `calc(${indicatorStyle.width}px - 50px)`,
-						height: 6,
-						borderRadius: 3,
-						background: '#e6eefc',
-						transition: 'left 0.3s cubic-bezier(.4,1.6,.6,1), width 0.3s cubic-bezier(.4,1.6,.6,1)',
-						zIndex: 0,
-					}}
-				/>
-				{sectionList.map((section, index) => (
-					<ButtonWithLink
-						focusRipple
-						key={section.title}
-						url={section.path}
-						onTarget={false}
-						ref={(el) => {
-							buttonRefs.current[index] = el;
-						}}
+			<Box sx={{ flex: 1, display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+				<Box sx={{ display: 'flex', position: 'relative', alignItems: 'center' }}>
+					<Box
 						sx={{
-							zIndex: 1,
-							background: section.isSelected ? 'transparent' : 'none',
-							borderRadius: '12px',
-							p: 1.2,
+							position: 'absolute',
+							left: `calc(${indicatorStyle.left}px + 25px)`,
+							bottom: 4,
+							width: `calc(${indicatorStyle.width}px - 50px)`,
+							height: 6,
+							borderRadius: 3,
+							background: '#e6eefc',
+							transition:
+								'left 0.3s cubic-bezier(.4,1.6,.6,1), width 0.3s cubic-bezier(.4,1.6,.6,1)',
+							zIndex: 0,
 						}}
-					>
-						<Typography
-							variant="body1"
-							color="primary"
+					/>
+					{sectionList.map((section, index) => (
+						<ButtonWithLink
+							focusRipple
+							key={section.title}
+							url={section.path}
+							onTarget={false}
+							ref={(el) => {
+								buttonRefs.current[index] = el;
+							}}
 							sx={{
-								minWidth: 100,
-								transition: 'font-weight 0.2s',
-								fontWeight: section.isSelected ? 700 : 400,
-								'&:hover': {
-									fontWeight: 700,
-								},
+								zIndex: 1,
+								background: section.isSelected ? 'transparent' : 'none',
+								borderRadius: '12px',
+								p: 1.2,
 							}}
 						>
-							{section.title}
-						</Typography>
-					</ButtonWithLink>
-				))}
+							<Typography
+								variant="body1"
+								color="primary"
+								sx={{
+									minWidth: 100,
+									transition: 'font-weight 0.2s',
+									fontWeight: section.isSelected ? 700 : 400,
+									'&:hover': {
+										fontWeight: 700,
+									},
+								}}
+							>
+								{section.title}
+							</Typography>
+						</ButtonWithLink>
+					))}
+				</Box>
+				<IconButtonWrapper onClick={toggleTheme} color="inherit" aria-label={'mode-button'}>
+					{theme === 'dark' ? <Bedtime color="primary" /> : <BrightnessHigh color="primary" />}
+				</IconButtonWrapper>
 			</Box>
-			<IconButtonWrapper onClick={toggleTheme} color="inherit" aria-label={'mode-button'}>
-				{theme === 'dark' ? <Bedtime color="primary" /> : <BrightnessHigh color="primary" />}
-			</IconButtonWrapper>
 		</Toolbar>
 	);
 };
