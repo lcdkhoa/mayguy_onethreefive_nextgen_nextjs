@@ -1,6 +1,6 @@
 'use client';
 
-import { sections } from '@/configs/constants';
+import { HOME, sections } from '@/configs/constants';
 import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
 
@@ -9,8 +9,8 @@ export const usePageTitle = () => {
 
 	useEffect(() => {
 		const matched = sections.find((section) => section.path === pathname);
-		if (matched) {
-			document.title = matched.webTitle;
+		if (matched || pathname === HOME) {
+			document.title = matched?.webTitle || `Dang Khoa's corner 🔅`;
 		}
 	}, [pathname]);
 };

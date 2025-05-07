@@ -27,6 +27,7 @@ export default function Home() {
 					style={{
 						objectFit: 'scale-down',
 						maxHeight: isMobile ? '40vh' : '65vh',
+						width: 'auto',
 					}}
 					className={`zoom-in`}
 				/>

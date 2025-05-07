@@ -141,7 +141,7 @@ const Header = () => {
 					</ButtonWithLink>
 				))}
 			</Box>
-			<IconButtonWrapper onClick={toggleTheme} color="inherit">
+			<IconButtonWrapper onClick={toggleTheme} color="inherit" aria-label={'mode-button'}>
 				{theme === 'dark' ? <Bedtime color="primary" /> : <BrightnessHigh color="primary" />}
 			</IconButtonWrapper>
 		</Toolbar>
