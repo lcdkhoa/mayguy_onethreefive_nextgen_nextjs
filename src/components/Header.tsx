@@ -1,10 +1,10 @@
 'use client';
 
-import { sections } from '@/configs/constants';
+import { HOME, sections } from '@/configs/constants';
 import { useTheme } from '@/contexts/ThemeContext';
 import { color } from '@/styles/color';
 import { Bedtime, BrightnessHigh } from '@mui/icons-material';
-import { Box, Toolbar, Typography } from '@mui/material';
+import { Box, Fade, Toolbar, Typography } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -13,14 +13,28 @@ import { useEffect, useRef, useState } from 'react';
 import ButtonWithLink from './Buttons/ButtonWithLink';
 import IconButtonWrapper from './Buttons/IconButton';
 
+const INITIAL_SECTIONS = sections.map((section) => ({
+	...section,
+	isSelected: false,
+}));
+
+const INITIAL_INDICATOR_STYLE = { left: 0, width: 0 };
+
 const Header = () => {
 	const { theme, toggleTheme } = useTheme();
-	const [sectionList, setSectionList] = useState(sections);
+	const [sectionList, setSectionList] = useState(INITIAL_SECTIONS);
 	const pathname = usePathname();
-	const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
+	const [indicatorStyle, setIndicatorStyle] = useState(INITIAL_INDICATOR_STYLE);
 	const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
 	useEffect(() => {
+		if (pathname === HOME) {
+			setIndicatorStyle(INITIAL_INDICATOR_STYLE);
+			setSectionList(INITIAL_SECTIONS);
+			buttonRefs.current = [];
+			return;
+		}
+
 		const matched = sections.find((section) => section.path === pathname);
 		if (matched) {
 			matched.isSelected = true;
@@ -49,23 +63,36 @@ const Header = () => {
 		<Toolbar
 			sx={{
 				gap: 3,
-				backgroundColor:
-					theme === 'light' ? color.light.background.header : color.dark.background.header,
+				backgroundColor: color[theme].background.header,
 				position: 'relative',
 				minHeight: 64,
 			}}
 		>
-			<Link
-				href="/"
-				style={{
-					display: 'flex',
-					alignItems: 'center',
-					justifyContent: 'center',
-					cursor: 'pointer',
-				}}
-			>
-				<Image src="/icon.ico" alt="Logo" width={40} height={40} style={{ objectFit: 'contain' }} />
-			</Link>
+			<Fade in={pathname !== HOME} timeout={500}>
+				<Box
+					sx={{
+						opacity: pathname === HOME ? 0 : 1,
+					}}
+				>
+					<Link
+						href={HOME}
+						style={{
+							display: 'flex',
+							alignItems: 'center',
+							justifyContent: 'center',
+							cursor: 'pointer',
+						}}
+					>
+						<Image
+							src="/icon.ico"
+							alt="Logo"
+							width={40}
+							height={40}
+							style={{ objectFit: 'contain' }}
+						/>
+					</Link>
+				</Box>
+			</Fade>
 			<Box sx={{ flexGrow: 1 }} />
 			<Box sx={{ display: 'flex', position: 'relative', alignItems: 'center' }}>
 				<Box

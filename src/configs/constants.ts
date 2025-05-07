@@ -33,3 +33,5 @@ export const sections: Section[] = [
 		isSelected: false,
 	},
 ];
+
+export const HOME: string = '/';
