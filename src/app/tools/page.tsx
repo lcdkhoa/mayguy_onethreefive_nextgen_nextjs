@@ -2,6 +2,9 @@
 
 import { useTheme } from '@/contexts/ThemeContext';
 import { color } from '@/styles/color';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import ShareIcon from '@mui/icons-material/Share';
 import { Grid } from '@mui/material';
 import Backdrop from '@mui/material/Backdrop';
 import Card from '@mui/material/Card';
@@ -9,6 +12,10 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
+import IconButton from '@mui/material/IconButton';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
+import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -20,6 +27,8 @@ export default function Tools({ toolParam }: { toolParam?: string }) {
 	const { theme } = useTheme();
 	const router = useRouter();
 	const [isLoading, setIsLoading] = useState(false);
+	const [tab, setTab] = useState(0);
+	const [favorites, setFavorites] = useState<string[]>([]);
 
 	useEffect(() => {
 		ReactGA.send({
@@ -35,6 +44,32 @@ export default function Tools({ toolParam }: { toolParam?: string }) {
 			action: 'Click on Object Handler',
 		});
 	}, [toolParam]);
+
+	useEffect(() => {
+		const fav = localStorage.getItem('favoriteTools');
+		if (fav) setFavorites(JSON.parse(fav));
+	}, []);
+
+	const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
+		setTab(newValue);
+	};
+
+	const handleFavorite = (toolPath: string) => {
+		let newFavs = [...favorites];
+		if (favorites.includes(toolPath)) {
+			newFavs = newFavs.filter((f) => f !== toolPath);
+		} else {
+			newFavs.push(toolPath);
+		}
+		setFavorites(newFavs);
+		localStorage.setItem('favoriteTools', JSON.stringify(newFavs));
+	};
+
+	const handleShare = (toolPath: string) => {
+		const url = `${window.location.origin}/tools/${toolPath.split('/').pop()}`;
+		navigator.clipboard.writeText(url);
+		alert('Copied link!');
+	};
 
 	const handleOpen = (index: number) => {
 		setIsLoading(true);
@@ -55,15 +90,25 @@ export default function Tools({ toolParam }: { toolParam?: string }) {
 			<Backdrop open={isLoading} sx={{ zIndex: 9999, color: 'white' }}>
 				<Grid className="loader"></Grid>
 			</Backdrop>
+			<Grid container justifyContent="center" mt={5}>
+				<Tabs value={tab} onChange={handleTabChange}>
+					<Tab label="All" />
+					<Tab label="Favorites" />
+				</Tabs>
+			</Grid>
 			<Grid
 				container
 				alignContent={'center'}
 				justifyContent={'center'}
 				sx={{ overflow: 'hidden', display: 'flex', flexDirection: 'row' }}
-				mt={10}
+				mt={2}
 			>
-				{ToolCardList.map((tool, index) => {
+				{(tab === 0
+					? ToolCardList
+					: ToolCardList.filter((tool) => favorites.includes(tool.path))
+				).map((tool, index) => {
 					const isSelected = tool.path.split('/').pop() === toolParam;
+					const isFavorite = favorites.includes(tool.path);
 					return (
 						<Grid key={index}>
 							{isSelected && <tool.component open={isSelected} close={handleClose} index={index} />}
@@ -81,7 +126,38 @@ export default function Tools({ toolParam }: { toolParam?: string }) {
 								}}
 								onClick={() => handleOpen(index)}
 							>
-								<CardHeader title={tool.title} subheader={tool.version} />
+								<CardHeader
+									title={tool.title}
+									subheader={tool.version}
+									action={
+										<Grid container spacing={1}>
+											<Grid>
+												<Tooltip title="Share Link">
+													<IconButton
+														onClick={(e) => {
+															e.stopPropagation();
+															handleShare(tool.path);
+														}}
+													>
+														<ShareIcon />
+													</IconButton>
+												</Tooltip>
+											</Grid>
+											<Grid>
+												<Tooltip title={isFavorite ? 'Remove from favorites' : 'Add to favorites'}>
+													<IconButton
+														onClick={(e) => {
+															e.stopPropagation();
+															handleFavorite(tool.path);
+														}}
+													>
+														{isFavorite ? <FavoriteIcon color="error" /> : <FavoriteBorderIcon />}
+													</IconButton>
+												</Tooltip>
+											</Grid>
+										</Grid>
+									}
+								/>
 								<Grid style={{ height: 250, overflow: 'hidden' }}>
 									<CardMedia
 										component="img"
