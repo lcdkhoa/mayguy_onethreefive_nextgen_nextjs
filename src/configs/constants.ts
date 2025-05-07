@@ -9,14 +9,6 @@ interface Section {
 
 export const sections: Section[] = [
 	{
-		title: 'HOME',
-		width: '10%',
-		path: '/',
-		iconsURL: '/images/icons/home.png',
-		webTitle: 'Dang Khoa 🔅 Home',
-		isSelected: false,
-	},
-	{
 		title: 'BLOGS',
 		width: '10%',
 		path: '/blogs',

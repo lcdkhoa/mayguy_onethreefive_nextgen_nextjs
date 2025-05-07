@@ -5,6 +5,8 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { color } from '@/styles/color';
 import { Bedtime, BrightnessHigh } from '@mui/icons-material';
 import { Box, Toolbar, Typography } from '@mui/material';
+import Image from 'next/image';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 
@@ -53,6 +55,17 @@ const Header = () => {
 				minHeight: 64,
 			}}
 		>
+			<Link
+				href="/"
+				style={{
+					display: 'flex',
+					alignItems: 'center',
+					justifyContent: 'center',
+					cursor: 'pointer',
+				}}
+			>
+				<Image src="/icon.ico" alt="Logo" width={40} height={40} style={{ objectFit: 'contain' }} />
+			</Link>
 			<Box sx={{ flexGrow: 1 }} />
 			<Box sx={{ display: 'flex', position: 'relative', alignItems: 'center' }}>
 				<Box
