@@ -1,4 +1,4 @@
-import HandlerButton from '@/components/HandlerButton';
+import ButtonWrapper from '@/components/Buttons/Button';
 import MonacoEditorWrapper from '@/components/MonacoEditor';
 import { FlattenObjects, UnflattenObjects } from '@/utils/object-handler';
 import { Dialog, DialogContent, Divider, Grid } from '@mui/material';
@@ -102,18 +102,12 @@ export default function ObjectHandler({ ...props }: ObjectHandlerProps) {
 					<MonacoEditorWrapper value={text} onChange={handleOnchange} />
 				</DialogContent>
 				<Divider />
-				<Grid
-					container
-					direction={'row'}
-					justifyContent={'center'}
-					paddingBottom={2}
-					paddingTop={2}
-				>
-					<HandlerButton onClick={() => handleUnflatten()}>Convert to Nested</HandlerButton>
-					<HandlerButton onClick={() => handleFlatten()}>Convert to Flat</HandlerButton>
-					<HandlerButton onClick={() => handleAddInput()}>{inputText}</HandlerButton>
-					<HandlerButton onClick={() => handleAddOutput()}>{outputText}</HandlerButton>
-					<HandlerButton onClick={handleClose}>Close</HandlerButton>
+				<Grid container justifyContent={'center'} paddingBottom={2} paddingTop={2}>
+					<ButtonWrapper onClick={() => handleUnflatten()}>Convert to Nested</ButtonWrapper>
+					<ButtonWrapper onClick={() => handleFlatten()}>Convert to Flat</ButtonWrapper>
+					<ButtonWrapper onClick={() => handleAddInput()}>{inputText}</ButtonWrapper>
+					<ButtonWrapper onClick={() => handleAddOutput()}>{outputText}</ButtonWrapper>
+					<ButtonWrapper onClick={handleClose}>Close</ButtonWrapper>
 				</Grid>
 			</Dialog>
 		</form>

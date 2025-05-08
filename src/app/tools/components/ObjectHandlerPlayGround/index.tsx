@@ -1,9 +1,9 @@
 'use client';
 
-import HandlerButton from '@/components/HandlerButton';
+import ButtonWrapper from '@/components/Buttons/Button';
 import MonacoEditorWrapper from '@/components/MonacoEditor';
-// import { FlattenObjects, UnFlatObjects } from '@lcdkhoa/object-handler';
 import { FlattenObjects, UnFlatObjects } from '@/utils/object-handler-playground';
+// import { FlattenObjects, UnFlatObjects } from '@lcdkhoa/object-handler';
 import { Dialog, DialogContent, Divider, Grid } from '@mui/material';
 import { useState } from 'react';
 
@@ -99,10 +99,10 @@ export default function ObjectHandler({ ...props }: ObjectHandlerProps) {
 						handleChange={handleChange}
 						splitter={splitter}
 					/>
-					<HandlerButton onClick={() => handleUnFlat()}>Convert to Nested</HandlerButton>
-					<HandlerButton onClick={() => handleFlatten()}>Convert to Flat</HandlerButton>
+					<ButtonWrapper onClick={() => handleUnFlat()}>Convert to Nested</ButtonWrapper>
+					<ButtonWrapper onClick={() => handleFlatten()}>Convert to Flat</ButtonWrapper>
 
-					<HandlerButton onClick={handleClose}>Close</HandlerButton>
+					<ButtonWrapper onClick={handleClose}>Close</ButtonWrapper>
 				</Grid>
 			</Dialog>
 		</form>

@@ -1,6 +1,6 @@
 'use client';
 
-import HandlerButton from '@/components/HandlerButton';
+import ButtonWrapper from '@/components/Buttons/Button';
 import MonacoEditorWrapper from '@/components/MonacoEditor';
 import { ConvertJsonToYaml } from '@/utils/swagger-creator';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
@@ -182,10 +182,10 @@ export default function SwaggerCreator({ ...props }: SwaggerCreatorProps) {
 					paddingBottom={2}
 					paddingTop={2}
 				>
-					<HandlerButton type="submit" onClick={handleSubmit}>
+					<ButtonWrapper type="submit" onClick={handleSubmit}>
 						Create Swagger
-					</HandlerButton>
-					<HandlerButton onClick={handleClose}>Close</HandlerButton>
+					</ButtonWrapper>
+					<ButtonWrapper onClick={handleClose}>Close</ButtonWrapper>
 				</Grid>
 			</Dialog>
 		</form>
