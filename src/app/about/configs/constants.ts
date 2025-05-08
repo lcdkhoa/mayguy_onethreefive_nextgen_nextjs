@@ -9,6 +9,7 @@ export const ABOUT_ME_THIRD =
 export const ABOUT_ME_FOURTH = 'You will also find some small apps I have built along the way.';
 export const ABOUT_ME_FIFTH =
 	'All of the works in this blog is free to use. This blog runs on a custom engine developed by me (based on NextJS).';
-export const ABOUT_ME_SIXTH = 'Follow me on:';
+export const ABOUT_ME_SIXTH = 'Connect with me on:';
 export const LINKEDIN_URL = 'https://www.linkedin.com/in/lcdkhoa';
 export const GITHUB_URL = 'https://github.com/lcdkhoa';
+export const EMAIL_URL = 'mailto:lcdkhoa@hotmail.com';
