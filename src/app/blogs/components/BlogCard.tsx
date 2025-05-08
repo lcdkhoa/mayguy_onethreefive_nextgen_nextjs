@@ -1,6 +1,6 @@
 'use client';
 
-import { BlogPost } from '@/lib/blog';
+import { BlogPost } from '@/utils/get-blog-post';
 import { Chip, Paper, Stack, Typography } from '@mui/material';
 import { format } from 'date-fns';
 import { vi } from 'date-fns/locale';

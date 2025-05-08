@@ -1,7 +1,7 @@
-import BlogLayout from '@/components/blog/BlogLayout';
-import MDXContent from '@/components/blog/MDXContent';
-import TableOfContents from '@/components/blog/TableOfContents';
-import { getAllPosts, getPostBySlug } from '@/lib/blog';
+import BlogLayout from '@/app/blogs/components/BlogLayout';
+import MDXContent from '@/app/blogs/components/MDXContent';
+import TableOfContents from '@/app/blogs/components/TableOfContents';
+import { getAllPosts, getPostBySlug } from '@/utils/get-blog-post';
 import { Box, Container, Paper, Typography } from '@mui/material';
 import { format } from 'date-fns';
 import { vi } from 'date-fns/locale';
@@ -19,11 +19,12 @@ export async function generateMetadata({
 }: {
 	params: { slug: string };
 }): Promise<Metadata> {
-	const post = await getPostBySlug(params.slug);
+	const { slug } = await params;
+	const post = await getPostBySlug(slug);
 
 	if (!post) {
 		return {
-			title: 'Không tìm thấy bài viết',
+			title: 'Not found',
 		};
 	}
 
@@ -40,7 +41,8 @@ export async function generateMetadata({
 }
 
 export default async function BlogPost({ params }: { params: { slug: string } }) {
-	const post = await getPostBySlug(params.slug);
+	const { slug } = await params;
+	const post = await getPostBySlug(slug);
 
 	if (!post) return notFound();
 

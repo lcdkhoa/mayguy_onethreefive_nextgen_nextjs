@@ -1,5 +1,5 @@
-import BlogCard from '@/components/blog/BlogCard';
-import { getAllPosts } from '@/lib/blog';
+import BlogCard from '@/app/blogs/components/BlogCard';
+import { getAllPosts } from '@/utils/get-blog-post';
 import { Container, Grid, Typography } from '@mui/material';
 
 export const metadata = {
