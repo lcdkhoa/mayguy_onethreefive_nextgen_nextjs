@@ -1,21 +1,28 @@
-'use client';
+import BlogCard from '@/components/blog/BlogCard';
+import { getAllPosts } from '@/lib/blog';
+import { Container, Grid, Typography } from '@mui/material';
 
-import { Grid, Typography } from '@mui/material';
+export const metadata = {
+	title: 'Blog',
+	description: 'Danh sách các bài viết blog',
+};
 
-export default function Blog() {
+export default async function BlogsPage() {
+	const posts = await getAllPosts();
+
 	return (
-		<Grid
-			justifyContent={'center'}
-			alignContent={'center'}
-			sx={{ display: 'flex', flexDirection: 'column' }}
-			mt={10}
-		>
-			<Typography variant="h1" color="text.primary" textAlign={'center'} gutterBottom>
-				Building Blog Section
+		<Container maxWidth="lg" sx={{ py: 4 }}>
+			<Typography variant="h1" component="h1" gutterBottom>
+				Blog
 			</Typography>
-			<Typography variant="h5" color="text.secondary" textAlign={'center'}>
-				Coming soon
-			</Typography>
-		</Grid>
+
+			<Grid container spacing={4}>
+				{posts.map((post) => (
+					<Grid key={post.slug}>
+						<BlogCard post={post} />
+					</Grid>
+				))}
+			</Grid>
+		</Container>
 	);
 }
