@@ -141,7 +141,7 @@ const Header = () => {
 								sx={{
 									minWidth: 100,
 									transition: 'font-weight 0.2s',
-									fontWeight: section.isSelected ? 700 : 400,
+									fontWeight: section.isSelected ? 700 : 500,
 									'&:hover': {
 										fontWeight: 700,
 									},

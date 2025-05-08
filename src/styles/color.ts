@@ -1,72 +1,106 @@
 export const color = {
 	black: '#000000',
 	white: '#ffffff',
+
 	light: {
 		primary: {
-			main: '#2B6CB0',
+			main: '#1E88E5', // Blue 600
+			contrastText: '#ffffff',
 		},
 		secondary: {
-			main: '#4299E1',
+			main: '#1565C0', // Blue 800
+			contrastText: '#ffffff',
 		},
 		error: {
-			main: '#E53E3E',
+			main: '#B3261E',
+			contrastText: '#ffffff',
 		},
 		success: {
-			main: '#38A169',
+			main: '#0F7B6C',
+			contrastText: '#ffffff',
 		},
 		warning: {
-			main: '#DD6B20',
+			main: '#EAA800',
+			contrastText: '#000000',
 		},
 		info: {
-			main: '#3182CE',
+			main: '#227C9D',
+			contrastText: '#ffffff',
 		},
 		background: {
 			default: '#FFFFFF',
-			paper: '#F7FAFC',
-			body: '#F2F7FE',
-			header: '#FAFDFF',
-			footer: '#EEEEEE',
+			paper: '#F7F7F7',
+			body: '#F2F4F8',
+			header: '#FAFAFA',
+			footer: '#EDEDED',
 		},
 		text: {
-			primary: '#1A202C',
-			secondary: '#4A5568',
+			primary: '#0B3D91', // Navy Blue
+			secondary: '#5C86C7', // Light Blue
 		},
-		card: {
-			shadow: '#000000',
-		},
+		shadow: [
+			'none',
+			'0px 1px 2px 0px #0000001a',
+			'0px 2px 4px 0px #00000033',
+			'0px 3px 6px 0px #0000004d',
+			'0px 4px 8px 0px #00000066',
+			'0px 6px 12px 0px #00000080',
+			'0px 8px 16px 0px #00000099',
+			'0px 12px 24px 0px #000000b3',
+			'0px 16px 32px 0px #000000cc',
+			'0px 20px 40px 0px #000000e6',
+			'0px 24px 48px 0px #ffffff1a',
+		],
 	},
+
 	dark: {
 		primary: {
-			main: '#63B3ED',
+			main: '#90CAF9', // Blue 200
+			contrastText: '#0B3D91',
 		},
 		secondary: {
-			main: '#90CDF4',
+			main: '#64B5F6', // Blue 300
+			contrastText: '#0B3D91',
 		},
 		error: {
-			main: '#FC8181',
+			main: '#F2B8B5',
+			contrastText: '#1C1B1F',
 		},
 		success: {
-			main: '#68D391',
+			main: '#A6E3D3',
+			contrastText: '#1C1B1F',
 		},
 		warning: {
-			main: '#F6AD55',
+			main: '#FFD60A',
+			contrastText: '#1C1B1F',
 		},
 		info: {
-			main: '#63B3ED',
+			main: '#66D1FF',
+			contrastText: '#1C1B1F',
 		},
 		background: {
-			default: '#1A202C',
-			paper: '#2D3748',
-			body: '#1E293B',
-			header: '#141C30',
-			footer: '#424242',
+			default: '#121212',
+			paper: '#1E1E1E',
+			body: '#181818',
+			header: '#0F0F0F',
+			footer: '#2A2A2A',
 		},
 		text: {
-			primary: '#F7FAFC',
-			secondary: '#CBD5E0',
+			primary: '#90CAF9', // Light Blue
+			secondary: '#64B5F6', // Sky Blue
 		},
-		card: {
-			shadow: '#FFFFFF',
-		},
+		shadow: [
+			'none',
+			'0px 1px 2px 0px #ffffff1a',
+			'0px 2px 4px 0px #ffffff33',
+			'0px 3px 6px 0px #ffffff4d',
+			'0px 4px 8px 0px #ffffff66',
+			'0px 6px 12px 0px #ffffff80',
+			'0px 8px 16px 0px #ffffff99',
+			'0px 12px 24px 0px #ffffffb3',
+			'0px 16px 32px 0px #ffffffcc',
+			'0px 20px 40px 0px #ffffffe6',
+			'0px 24px 48px 0px #ffffff',
+		],
 	},
 };

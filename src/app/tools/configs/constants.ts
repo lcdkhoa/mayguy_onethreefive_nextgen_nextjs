@@ -18,7 +18,7 @@ export const ToolCardList = [
 		id: 1,
 		title: 'Object-Handler 360F',
 		description:
-			'Convert complex nested data structures into flat formats and vice versa, to enhance simplicity and efficiency in data management.',
+			'Convert complex nested data structures into flat formats and vice versa, to enhance simplicity and efficiency in data management. This tool only adapt with 360F API, not support other standard API.',
 		imageUrl: '/images/cards/object_handler.png',
 		component: ObjectHandler,
 		path: '/tools/object-handler-360f',
@@ -42,7 +42,7 @@ export const ToolCardList = [
 		id: 1,
 		title: 'Object-Handler PlayGround',
 		description:
-			'Convert complex nested data structures into flat formats and vice versa, to enhance simplicity and efficiency in data management. You can freely test and play with this tool.',
+			'Convert complex nested data structures into flat formats and vice versa, to enhance simplicity and efficiency in data management.',
 		imageUrl: '/images/cards/object_handler_playground.jpg',
 		component: ObjectHandlerPlayGround,
 		path: '/tools/object-handler',

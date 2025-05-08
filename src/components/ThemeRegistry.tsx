@@ -1,19 +1,15 @@
 'use client';
 
 import { useTheme } from '@/contexts/ThemeContext';
+import { darkTheme, lightTheme } from '@/styles/theme';
 import CssBaseline from '@mui/material/CssBaseline';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 
 export default function ThemeRegistry({ children }: { children: React.ReactNode }) {
 	const { theme } = useTheme();
-	const muiTheme = createTheme({
-		palette: {
-			mode: theme,
-		},
-	});
 
 	return (
-		<ThemeProvider theme={muiTheme}>
+		<ThemeProvider theme={theme === 'dark' ? darkTheme : lightTheme}>
 			<CssBaseline />
 			{children}
 		</ThemeProvider>

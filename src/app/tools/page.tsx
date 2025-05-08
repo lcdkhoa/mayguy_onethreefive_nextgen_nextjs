@@ -5,12 +5,15 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { color } from '@/styles/color';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import ShareIcon from '@mui/icons-material/Share';
 import { Grid } from '@mui/material';
+import Accordion from '@mui/material/Accordion';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import AccordionSummary from '@mui/material/AccordionSummary';
 import Backdrop from '@mui/material/Backdrop';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import Tab from '@mui/material/Tab';
@@ -92,8 +95,20 @@ export default function Tools({ toolParam }: { toolParam?: string }) {
 			</Backdrop>
 			<Grid container justifyContent="center" mt={5}>
 				<Tabs value={tab} onChange={handleTabChange}>
-					<Tab label="All" />
-					<Tab label="Favorites" />
+					<Tab
+						label={
+							<Typography variant="subtitle1" color="text.primary">
+								All
+							</Typography>
+						}
+					/>
+					<Tab
+						label={
+							<Typography variant="subtitle1" color="text.primary">
+								Favorites
+							</Typography>
+						}
+					/>
 				</Tabs>
 			</Grid>
 			<Grid
@@ -122,7 +137,7 @@ export default function Tools({ toolParam }: { toolParam?: string }) {
 									margin: '10px',
 									overflow: 'hidden',
 									'&:hover': {
-										boxShadow: `0 4px 6px 0 ${color[theme].card.shadow}`,
+										boxShadow: `${color[theme].shadow[4]}`,
 									},
 								}}
 							>
@@ -130,21 +145,33 @@ export default function Tools({ toolParam }: { toolParam?: string }) {
 									title={tool.title}
 									subheader={tool.version}
 									action={
-										<Grid container spacing={1}>
+										<Grid container spacing={1} alignItems="center">
 											<Grid>
-												<Tooltip title="Share Link">
+												<Tooltip
+													title={
+														<Typography variant="caption" color="white">
+															Share Link
+														</Typography>
+													}
+												>
 													<IconButton
 														onClick={(e) => {
 															e.stopPropagation();
 															handleShare(tool.path);
 														}}
 													>
-														<ShareIcon />
+														<ShareIcon color="warning" />
 													</IconButton>
 												</Tooltip>
 											</Grid>
 											<Grid>
-												<Tooltip title={isFavorite ? 'Remove from favorites' : 'Add to favorites'}>
+												<Tooltip
+													title={
+														<Typography variant="caption" color="white">
+															{isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+														</Typography>
+													}
+												>
 													<IconButton
 														onClick={(e) => {
 															e.stopPropagation();
@@ -155,35 +182,58 @@ export default function Tools({ toolParam }: { toolParam?: string }) {
 													</IconButton>
 												</Tooltip>
 											</Grid>
+											<Grid>
+												<Tooltip
+													title={
+														<Typography variant="caption" color="white">
+															Fun start
+														</Typography>
+													}
+												>
+													<Link
+														href={tool.path}
+														style={{ color: 'inherit' }}
+														onClick={handleOpenTool}
+													>
+														<IconButton>
+															<PlayArrowIcon color="info" />
+														</IconButton>
+													</Link>
+												</Tooltip>
+											</Grid>
 										</Grid>
 									}
 								/>
-								<Link href={tool.path} style={{ textDecoration: 'none' }} onClick={handleOpenTool}>
-									<Grid style={{ height: 250, overflow: 'hidden' }}>
-										<CardMedia
-											component="img"
-											height="250"
-											image={tool.imageUrl}
-											alt={tool.title}
-											sx={{
-												transition: 'transform 0.2s ease-in-out',
-												objectFit: 'cover',
-												width: '100%',
-												height: '100%',
-												'&:hover': {
-													transform: 'scale(1.1)',
-													transformOrigin: 'center',
-												},
-											}}
-										/>
-									</Grid>
-
-									<CardContent>
+								<Grid style={{ height: 250, overflow: 'hidden' }}>
+									<CardMedia
+										component="img"
+										height="250"
+										image={tool.imageUrl}
+										alt={tool.title}
+										sx={{
+											transition: 'transform 0.2s ease-in-out',
+											objectFit: 'cover',
+											width: '100%',
+											height: '100%',
+											'&:hover': {
+												transform: 'scale(1.1)',
+												transformOrigin: 'center',
+											},
+										}}
+									/>
+								</Grid>
+								{/* <Accordion>
+									<AccordionSummary aria-controls="panel-content" id={`panel-header-${tool.id}`}>
+										<Typography variant="subtitle2" fontWeight={600}>
+											Mô tả
+										</Typography>
+									</AccordionSummary>
+									<AccordionDetails>
 										<Typography variant="body2" color="text.secondary" textAlign={'justify'}>
 											{tool.description}
 										</Typography>
-									</CardContent>
-								</Link>
+									</AccordionDetails>
+								</Accordion> */}
 								<CardActions disableSpacing></CardActions>
 							</Card>
 						</Grid>

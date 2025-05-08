@@ -27,7 +27,7 @@ export default function About() {
 			mt={10}
 		>
 			<Box>
-				<Typography variant="h3" gutterBottom color="primary">
+				<Typography variant="h3" gutterBottom color="text.primary">
 					{ABOUT_SPACE}
 				</Typography>
 				<Typography variant="body1">{ABOUT_ME_FIRST}</Typography>

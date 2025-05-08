@@ -10,10 +10,10 @@ export default function Blog() {
 			sx={{ display: 'flex', flexDirection: 'column' }}
 			mt={10}
 		>
-			<Typography variant="h2" color="primary" textAlign={'center'} gutterBottom>
+			<Typography variant="h1" color="text.primary" textAlign={'center'} gutterBottom>
 				Building Blog Section
 			</Typography>
-			<Typography variant="h5" color="secondary" textAlign={'center'}>
+			<Typography variant="h5" color="text.secondary" textAlign={'center'}>
 				Coming soon
 			</Typography>
 		</Grid>

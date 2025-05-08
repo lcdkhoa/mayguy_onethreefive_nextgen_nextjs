@@ -33,7 +33,7 @@ export default function Home() {
 				/>
 			</Grid>
 			<Grid alignContent={'center'}>
-				<Typography variant={!isMobile ? 'h3' : 'body1'} color="primary">
+				<Typography variant={!isMobile ? 'h1' : 'body1'} color="text.primary">
 					WELCOME TO MY CORNER
 				</Typography>
 			</Grid>
