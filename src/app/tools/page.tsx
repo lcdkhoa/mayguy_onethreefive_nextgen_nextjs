@@ -3,23 +3,19 @@
 import IconButton from '@/components/Buttons/IconButton';
 import { useTheme } from '@/contexts/ThemeContext';
 import { color } from '@/styles/color';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import ShareIcon from '@mui/icons-material/Share';
-import { Grid } from '@mui/material';
-// import Accordion from '@mui/material/Accordion';
-// import AccordionDetails from '@mui/material/AccordionDetails';
-// import AccordionSummary from '@mui/material/AccordionSummary';
-import Backdrop from '@mui/material/Backdrop';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import Tab from '@mui/material/Tab';
-import Tabs from '@mui/material/Tabs';
-import Tooltip from '@mui/material/Tooltip';
-import Typography from '@mui/material/Typography';
+import { Favorite, FavoriteBorder, PlayArrow, Share } from '@mui/icons-material';
+import {
+	Backdrop,
+	Card,
+	CardActions,
+	CardHeader,
+	CardMedia,
+	Grid,
+	Tab,
+	Tabs,
+	Tooltip,
+	Typography,
+} from '@mui/material';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -160,7 +156,7 @@ export default function Tools({ toolParam }: { toolParam?: string }) {
 															handleShare(tool.path);
 														}}
 													>
-														<ShareIcon color="warning" />
+														<Share color="warning" />
 													</IconButton>
 												</Tooltip>
 											</Grid>
@@ -178,7 +174,7 @@ export default function Tools({ toolParam }: { toolParam?: string }) {
 															handleFavorite(tool.path);
 														}}
 													>
-														{isFavorite ? <FavoriteIcon color="error" /> : <FavoriteBorderIcon />}
+														{isFavorite ? <Favorite color="error" /> : <FavoriteBorder />}
 													</IconButton>
 												</Tooltip>
 											</Grid>
@@ -196,7 +192,7 @@ export default function Tools({ toolParam }: { toolParam?: string }) {
 														onClick={handleOpenTool}
 													>
 														<IconButton>
-															<PlayArrowIcon color="info" />
+															<PlayArrow color="info" />
 														</IconButton>
 													</Link>
 												</Tooltip>
@@ -222,18 +218,9 @@ export default function Tools({ toolParam }: { toolParam?: string }) {
 										}}
 									/>
 								</Grid>
-								{/* <Accordion>
-									<AccordionSummary aria-controls="panel-content" id={`panel-header-${tool.id}`}>
-										<Typography variant="subtitle2" fontWeight={600}>
-											Mô tả
-										</Typography>
-									</AccordionSummary>
-									<AccordionDetails>
-										<Typography variant="body2" color="text.secondary" textAlign={'justify'}>
-											{tool.description}
-										</Typography>
-									</AccordionDetails>
-								</Accordion> */}
+								<Typography variant="body2" color="text.secondary" textAlign={'justify'} p={2}>
+									{tool.description}
+								</Typography>
 								<CardActions disableSpacing></CardActions>
 							</Card>
 						</Grid>
