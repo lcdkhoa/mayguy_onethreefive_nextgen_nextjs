@@ -9,6 +9,8 @@ import { Metadata } from 'next';
 import { serialize } from 'next-mdx-remote/serialize';
 import { notFound } from 'next/navigation';
 
+import BreadcrumbArticle from '../components/BreadcrumbArticle';
+
 export async function generateStaticParams() {
 	const posts = await getAllPosts();
 	return posts.map((post) => ({ slug: post.slug }));
@@ -47,10 +49,17 @@ export default async function BlogPost({ params }: { params: { slug: string } })
 	if (!post) return notFound();
 
 	const mdxSource = await serialize(post.content);
+	const category = (post.tags && post.tags[0]) || 'uncategorized';
 
 	return (
 		<BlogLayout>
 			<Container maxWidth="lg">
+				<BreadcrumbArticle
+					category={category}
+					date={post.date}
+					title={post.title}
+					slug={post.slug}
+				/>
 				<Box sx={{ display: 'flex', gap: 4, py: 4 }}>
 					<Box sx={{ flex: 1 }}>
 						<Paper elevation={0} sx={{ p: 4 }}>
