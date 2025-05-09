@@ -1,0 +1,149 @@
+import IconButton from '@/components/Buttons/IconButton';
+import { useTheme } from '@/contexts/ThemeContext';
+import { color } from '@/styles/color';
+import { Favorite, FavoriteBorder, PlayArrow, Share } from '@mui/icons-material';
+import { Card, CardActions, CardHeader, CardMedia, Grid, Tooltip, Typography } from '@mui/material';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+
+import Loading from '../Loading';
+
+interface ToolProps {
+	id: string;
+	title: string;
+	description: string;
+	imageUrl: string;
+	path: string;
+	version: string;
+}
+
+export default function ToolsCard(tool: ToolProps) {
+	const { theme } = useTheme();
+	const [favorites, setFavorites] = useState<string[]>([]);
+
+	const [isLoading, setIsLoading] = useState(false);
+
+	const handleShare = (path: string) => {
+		const url = `${window.location.origin}/tools/${path.split('/').pop()}`;
+		navigator.clipboard.writeText(url);
+		alert('Copied link!');
+	};
+
+	const handleFavorite = (toolPath: string) => {
+		let arrFavorites = JSON.parse(localStorage.getItem('favoriteTools') || '[]');
+		if (arrFavorites.includes(toolPath)) {
+			arrFavorites = arrFavorites.filter((f: string) => f !== toolPath);
+		} else {
+			arrFavorites.push(toolPath);
+		}
+		setFavorites(arrFavorites);
+		localStorage.setItem('favoriteTools', JSON.stringify(arrFavorites));
+		window.dispatchEvent(new Event('storage'));
+	};
+
+	const handlePlay = () => {
+		setIsLoading(true);
+	};
+
+	const isFavorite = favorites.includes(tool.path);
+
+	return (
+		<>
+			<Loading isLoading={isLoading} />
+			<Card
+				sx={{
+					'width': 500,
+					'height': 420,
+					'borderRadius': '20px',
+					'margin': '10px',
+					'overflow': 'hidden',
+					'&:hover': {
+						boxShadow: `${color[theme].shadow[4]}`,
+					},
+				}}
+			>
+				<CardHeader
+					title={tool.title}
+					subheader={tool.version}
+					action={
+						<Grid container spacing={1} alignItems="center">
+							<Grid>
+								<Tooltip
+									title={
+										<Typography variant="caption" color="white">
+											Share Link
+										</Typography>
+									}
+								>
+									<IconButton
+										onClick={(e) => {
+											e.stopPropagation();
+											handleShare(tool.path);
+										}}
+									>
+										<Share color="warning" />
+									</IconButton>
+								</Tooltip>
+							</Grid>
+							<Grid>
+								<Tooltip
+									title={
+										<Typography variant="caption" color="white">
+											{isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+										</Typography>
+									}
+								>
+									<IconButton
+										onClick={(e) => {
+											e.stopPropagation();
+											handleFavorite(tool.path);
+										}}
+									>
+										{isFavorite ? <Favorite color="error" /> : <FavoriteBorder />}
+									</IconButton>
+								</Tooltip>
+							</Grid>
+							<Grid>
+								<Tooltip
+									title={
+										<Typography variant="caption" color="white">
+											Fun start
+										</Typography>
+									}
+								>
+									<Link href={tool.path} style={{ color: 'inherit' }} onClick={handlePlay}>
+										<IconButton>
+											<PlayArrow color="info" />
+										</IconButton>
+									</Link>
+								</Tooltip>
+							</Grid>
+						</Grid>
+					}
+				/>
+				<Grid style={{ height: 250, overflow: 'hidden' }}>
+					<CardMedia
+						component="img"
+						height="250"
+						image={tool.imageUrl}
+						alt={tool.title}
+						sx={{
+							'transition': 'transform 0.2s ease-in-out',
+							'objectFit': 'cover',
+							'width': '100%',
+							'height': '100%',
+							'&:hover': {
+								transform: 'scale(1.1)',
+								transformOrigin: 'center',
+							},
+						}}
+					/>
+				</Grid>
+				<Typography variant="body2" color="text.secondary" textAlign={'justify'} p={2}>
+					{tool.description}
+				</Typography>
+				<CardActions disableSpacing></CardActions>
+			</Card>
+		</>
+	);
+}

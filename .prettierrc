@@ -8,8 +8,16 @@
 	"singleQuote": true,
 	"trailingComma": "es5",
 	"proseWrap": "preserve",
-	"importOrder": ["<THIRD_PARTY_TS_TYPES>", "<TS_TYPES>^[./]", "<THIRD_PARTY_MODULES>", "^[./]"],
-	"plugins": ["@trivago/prettier-plugin-sort-imports"],
+	"importOrder": [
+		"<THIRD_PARTY_TS_TYPES>",
+		"<TS_TYPES>^[./]",
+		"<THIRD_PARTY_MODULES>",
+		"^[./]"
+	],
+	"plugins": [
+		"@trivago/prettier-plugin-sort-imports"
+	],
 	"importOrderSeparation": true,
-	"importOrderSortSpecifiers": true
+	"importOrderSortSpecifiers": true,
+	"quoteProps": "consistent"
 }
