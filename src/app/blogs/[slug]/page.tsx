@@ -1,56 +1,80 @@
+import BlogLayout from '@/app/blogs/components/BlogLayout';
+import TableOfContents from '@/app/blogs/components/TableOfContents';
+import { getAllPosts, getPostBySlug } from '@/utils/get-blog-post';
+import { Box, Container, Paper, Typography } from '@mui/material';
+import { format } from 'date-fns';
+import { vi } from 'date-fns/locale';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-const blogPosts = [
-	{
-		slug: 'bai-viet-dau-tien',
-		title: 'Bài viết đầu tiên',
-		content: 'Nội dung bài viết đầu tiên...',
-		date: '2024-03-20',
-	},
-	{
-		slug: 'bai-viet-thu-hai',
-		title: 'Bài viết thứ hai',
-		content: 'Nội dung bài viết thứ hai...',
-		date: '2024-03-21',
-	},
-];
+import BreadcrumbArticle from '../components/BreadcrumbArticle';
+import MDXContent from '../components/MDXContent';
 
-type Params = Promise<{ slug: string; title: string }>;
-
-export async function generateStaticParams() {
-	return blogPosts.map((post) => ({ slug: post.slug }));
+interface BlogPostProps {
+	params: Promise<{ slug: string }>;
 }
 
-export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+export async function generateStaticParams() {
+	const posts = await getAllPosts();
+	return posts.map((post) => ({ slug: post.slug }));
+}
+
+export async function generateMetadata({
+	params,
+}: {
+	params: { slug: string };
+}): Promise<Metadata> {
 	const { slug } = await params;
-	const post = blogPosts.find((p) => p.slug === slug);
+	const post = await getPostBySlug(slug);
 
 	if (!post) {
 		return {
-			title: 'Not Found',
+			title: 'Not found',
 		};
 	}
 
-	return {
-		title: `${post.title}`,
-		description: `Article about ${post.title}`,
-	};
+	return post;
 }
 
-export default async function Page({ params }: { params: Params }) {
+export default async function BlogPost({ params }: BlogPostProps) {
 	const { slug } = await params;
-	const post = blogPosts.find((p) => p.slug === slug);
+	const post = await getPostBySlug(slug);
 
 	if (!post) return notFound();
 
+	const category = post.tags?.[0] || 'uncategorized';
+
 	return (
-		<div>
-			<h1>{post.title}</h1>
-			<p>
-				<i>{post.date}</i>
-			</p>
-			<div>{post.content}</div>
-		</div>
+		<BlogLayout>
+			<Container maxWidth="lg">
+				<BreadcrumbArticle
+					category={category}
+					date={post.date}
+					title={post.title}
+					slug={post.slug}
+				/>
+				<Box sx={{ display: 'flex', gap: 4, py: 4 }}>
+					<Box sx={{ flex: 1 }}>
+						<Paper elevation={0} sx={{ p: 4 }}>
+							<Typography variant="h1" component="h1" gutterBottom>
+								{post.title}
+							</Typography>
+
+							<Typography variant="subtitle1" color="text.secondary" gutterBottom>
+								{post.date
+									? format(new Date(post.date), 'dd MMMM yyyy', { locale: vi })
+									: 'No date'}
+							</Typography>
+
+							<MDXContent content={post.content} />
+						</Paper>
+					</Box>
+
+					<Box sx={{ width: 300, display: { xs: 'none', md: 'block' } }}>
+						<TableOfContents content={post.content} />
+					</Box>
+				</Box>
+			</Container>
+		</BlogLayout>
 	);
 }

@@ -1,13 +1,6 @@
-interface Section {
-	title: string;
-	width: string;
-	path: string;
-	iconsURL: string;
-	webTitle: string;
-	isSelected: boolean;
-}
+import { SectionProps } from '@/types/section.types';
 
-export const sections: Section[] = [
+export const sections: SectionProps[] = [
 	{
 		title: 'BLOGS',
 		width: '10%',

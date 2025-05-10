@@ -20,7 +20,7 @@ export default function Home() {
 		>
 			<Grid alignContent={'center'}>
 				<Image
-					src="/images/backgrounds/under_construction.png"
+					src="/images/backgrounds/under-construction.png"
 					alt="Under Construction"
 					width={800}
 					height={600}

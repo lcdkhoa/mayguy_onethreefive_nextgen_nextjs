@@ -1,3 +1,5 @@
+'use client';
+
 import ButtonWrapper from '@/components/Buttons/Button';
 import MonacoEditorWrapper from '@/components/MonacoEditor';
 import { FlattenObjects, UnflattenObjects } from '@/utils/object-handler';
@@ -6,18 +8,17 @@ import { useState } from 'react';
 
 interface ObjectHandlerProps {
 	open: boolean;
-	close: (index: number) => void;
-	index: number;
+	close: () => void;
 }
 
 export default function ObjectHandler({ ...props }: ObjectHandlerProps) {
-	const { open, close, index } = props;
+	const { open, close } = props;
 	const [text, setText] = useState('');
 	const [inputText, setInputText] = useState('Add input_');
 	const [outputText, setOutputText] = useState('Add output_');
 
 	const handleClose = () => {
-		close(index);
+		close();
 		setText('');
 	};
 
