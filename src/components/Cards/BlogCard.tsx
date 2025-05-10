@@ -22,13 +22,18 @@ export default function BlogCard(blog: BlogCardProps) {
 	};
 
 	const handleFavorite = (blogId: string) => {
-		let arrFavorites = JSON.parse(localStorage.getItem('favoriteBlogs') || '[]');
+		let arrFavorites =
+			typeof window !== 'undefined'
+				? JSON.parse(localStorage.getItem('favoriteBlogs') || '[]')
+				: [];
 		if (arrFavorites.includes(blogId)) {
 			arrFavorites = arrFavorites.filter((f: string) => f !== blogId);
 		} else {
 			arrFavorites.push(blogId);
 		}
-		localStorage.setItem('favoriteBlogs', JSON.stringify(arrFavorites));
+		if (typeof window !== 'undefined') {
+			localStorage.setItem('favoriteBlogs', JSON.stringify(arrFavorites));
+		}
 		window.dispatchEvent(new Event('storage'));
 	};
 
@@ -36,7 +41,11 @@ export default function BlogCard(blog: BlogCardProps) {
 		setIsLoading(true);
 	};
 
-	const isFavorite = JSON.parse(localStorage.getItem('favoriteBlogs') || '[]').includes(blog.slug);
+	const isFavorite =
+		typeof window !== 'undefined'
+			? JSON.parse(localStorage.getItem('favoriteBlogs') || '[]').includes(blog.slug)
+			: false;
+
 	return (
 		<>
 			<Loading isLoading={isLoading} />
@@ -86,7 +95,7 @@ export default function BlogCard(blog: BlogCardProps) {
 									<IconButton
 										onClick={(e) => {
 											e.stopPropagation();
-											handleFavorite(blog.id);
+											handleFavorite(blog.slug);
 										}}
 									>
 										{isFavorite ? <Favorite color="error" /> : <FavoriteBorder />}

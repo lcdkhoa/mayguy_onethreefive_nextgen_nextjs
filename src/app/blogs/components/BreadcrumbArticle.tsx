@@ -11,7 +11,7 @@ interface BreadcrumbArticleProps {
 	slug: string;
 }
 
-export default function BreadcrumbArticle({ category, date, title, slug }: BreadcrumbArticleProps) {
+export default function BreadcrumbArticle({ date, title }: BreadcrumbArticleProps) {
 	const year = date ? format(new Date(date), 'yyyy') : '';
 	const month = date ? format(new Date(date), 'MM') : '';
 
@@ -20,9 +20,6 @@ export default function BreadcrumbArticle({ category, date, title, slug }: Bread
 			<Breadcrumbs aria-label="breadcrumb">
 				<MuiLink href="/blogs" color="inherit" component={Link}>
 					Blog
-				</MuiLink>
-				<MuiLink href={`/blogs?category=${category}`} color="inherit" component={Link}>
-					{category}
 				</MuiLink>
 				{year && (
 					<MuiLink href={`/blogs?year=${year}`} color="inherit" component={Link}>

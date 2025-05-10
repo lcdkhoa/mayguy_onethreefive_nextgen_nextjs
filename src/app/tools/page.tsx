@@ -15,8 +15,10 @@ export default function Tools({ toolParam }: { toolParam?: string }) {
 	const router = useRouter();
 
 	const updateFavorites = () => {
-		const fav = localStorage.getItem('favoriteTools');
-		if (fav) setFavorites(JSON.parse(fav));
+		if (typeof window !== 'undefined') {
+			const fav = localStorage.getItem('favoriteTools');
+			if (fav) setFavorites(JSON.parse(fav));
+		}
 	};
 
 	const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {

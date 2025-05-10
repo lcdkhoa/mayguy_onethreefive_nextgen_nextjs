@@ -8,8 +8,10 @@ interface MDXContentProps {
 	content: string;
 }
 
+type MDXSource = Parameters<typeof MDXRemote>[0];
+
 export default function MDXContent({ content }: MDXContentProps) {
-	const [mdxSource, setMdxSource] = useState<any>(null);
+	const [mdxSource, setMdxSource] = useState<MDXSource | null>(null);
 
 	useEffect(() => {
 		const processContent = async () => {

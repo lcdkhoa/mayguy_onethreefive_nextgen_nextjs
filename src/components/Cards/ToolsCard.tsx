@@ -20,13 +20,18 @@ export default function ToolsCard(tool: ToolCardProps) {
 	};
 
 	const handleFavorite = (toolPath: string) => {
-		let arrFavorites = JSON.parse(localStorage.getItem('favoriteTools') || '[]');
+		let arrFavorites =
+			typeof window !== 'undefined'
+				? JSON.parse(localStorage.getItem('favoriteTools') || '[]')
+				: [];
 		if (arrFavorites.includes(toolPath)) {
 			arrFavorites = arrFavorites.filter((f: string) => f !== toolPath);
 		} else {
 			arrFavorites.push(toolPath);
 		}
-		localStorage.setItem('favoriteTools', JSON.stringify(arrFavorites));
+		if (typeof window !== 'undefined') {
+			localStorage.setItem('favoriteTools', JSON.stringify(arrFavorites));
+		}
 		window.dispatchEvent(new Event('storage'));
 	};
 
@@ -34,7 +39,10 @@ export default function ToolsCard(tool: ToolCardProps) {
 		setIsLoading(true);
 	};
 
-	const isFavorite = JSON.parse(localStorage.getItem('favoriteTools') || '[]').includes(tool.path);
+	const isFavorite =
+		typeof window !== 'undefined'
+			? JSON.parse(localStorage.getItem('favoriteTools') || '[]').includes(tool.path)
+			: false;
 
 	return (
 		<>

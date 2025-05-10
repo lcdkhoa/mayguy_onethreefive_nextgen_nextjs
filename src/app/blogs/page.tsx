@@ -17,8 +17,10 @@ export default function BlogList({ blogParam }: { blogParam?: string }) {
 	const [favorites, setFavorites] = useState<string[]>([]);
 
 	const updateFavorites = () => {
-		const fav = localStorage.getItem('favoriteBlogs');
-		if (fav) setFavorites(JSON.parse(fav));
+		if (typeof window !== 'undefined') {
+			const fav = localStorage.getItem('favoriteBlogs');
+			if (fav) setFavorites(JSON.parse(fav));
+		}
 	};
 
 	const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
@@ -74,7 +76,7 @@ export default function BlogList({ blogParam }: { blogParam?: string }) {
 				>
 					{(tab === 0
 						? currentPostPerPage
-						: BlogCardList.filter((blog) => favorites.includes(blog.id))
+						: BlogCardList.filter((blog) => favorites.includes(blog.slug))
 					).map((blog) => {
 						return (
 							<Grid key={blog.id}>
