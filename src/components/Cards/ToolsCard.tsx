@@ -2,19 +2,11 @@ import IconButton from '@/components/Buttons/IconButton';
 import Loading from '@/components/Loading';
 import { useTheme } from '@/contexts/ThemeContext';
 import { color } from '@/styles/color';
+import { ToolCardProps } from '@/types/card.types';
 import { Favorite, FavoriteBorder, PlayArrow, Share } from '@mui/icons-material';
 import { Card, CardActions, CardHeader, CardMedia, Grid, Tooltip, Typography } from '@mui/material';
 import Link from 'next/link';
 import { useState } from 'react';
-
-interface ToolCardProps {
-	id: string;
-	title: string;
-	description: string;
-	coverImage: string;
-	path: string;
-	version: string;
-}
 
 export default function ToolsCard(tool: ToolCardProps) {
 	const { theme } = useTheme();

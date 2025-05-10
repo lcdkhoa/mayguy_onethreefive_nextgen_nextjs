@@ -1,15 +1,18 @@
 import BlogLayout from '@/app/blogs/components/BlogLayout';
-import MDXContent from '@/app/blogs/components/MDXContent';
 import TableOfContents from '@/app/blogs/components/TableOfContents';
 import { getAllPosts, getPostBySlug } from '@/utils/get-blog-post';
 import { Box, Container, Paper, Typography } from '@mui/material';
 import { format } from 'date-fns';
 import { vi } from 'date-fns/locale';
 import { Metadata } from 'next';
-import { serialize } from 'next-mdx-remote/serialize';
 import { notFound } from 'next/navigation';
 
 import BreadcrumbArticle from '../components/BreadcrumbArticle';
+import MDXContent from '../components/MDXContent';
+
+interface BlogPostProps {
+	params: Promise<{ slug: string }>;
+}
 
 export async function generateStaticParams() {
 	const posts = await getAllPosts();
@@ -30,26 +33,17 @@ export async function generateMetadata({
 		};
 	}
 
-	return {
-		title: post.title,
-		description: post.excerpt,
-		openGraph: {
-			title: post.title,
-			description: post.excerpt,
-			type: 'article',
-			publishedTime: post.date,
-		},
-	};
+	return post;
 }
 
-export default async function BlogPost({ params }: { params: { slug: string } }) {
+export default async function BlogPost({ params }: BlogPostProps) {
 	const { slug } = await params;
 	const post = await getPostBySlug(slug);
+	console.log('post', post);
 
 	if (!post) return notFound();
 
-	const mdxSource = await serialize(post.content);
-	const category = (post.tags && post.tags[0]) || 'uncategorized';
+	const category = post.tags?.[0] || 'uncategorized';
 
 	return (
 		<BlogLayout>
@@ -71,10 +65,9 @@ export default async function BlogPost({ params }: { params: { slug: string } })
 								{post.date
 									? format(new Date(post.date), 'dd MMMM yyyy', { locale: vi })
 									: 'No date'}
-								{post.author && ` • ${post.author}`}
 							</Typography>
 
-							<MDXContent source={mdxSource} />
+							<MDXContent content={post.content} />
 						</Paper>
 					</Box>
 

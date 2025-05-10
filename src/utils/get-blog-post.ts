@@ -1,18 +1,17 @@
+import { BlogCardList } from '@/app/blogs/configs/constants';
 import fs from 'fs';
 import matter from 'gray-matter';
 import path from 'path';
-import { v4 as uuidv4 } from 'uuid';
 
 const BLOGS_PATH = path.join(process.cwd(), 'src/app/blogs/content');
 
 export interface BlogPost {
-	id: string;
+	id?: string;
 	slug: string;
 	title: string;
 	date: string;
 	excerpt: string;
 	content: string;
-	author?: string;
 	tags?: string[];
 	category?: string;
 	coverImage?: string;
@@ -20,17 +19,15 @@ export interface BlogPost {
 
 export async function getAllPosts(): Promise<BlogPost[]> {
 	const files = fs.readdirSync(BLOGS_PATH);
-	console.log(files);
 
 	const posts = files
 		.filter((file) => file.endsWith('.mdx'))
 		.map((file) => {
 			const filePath = path.join(BLOGS_PATH, file);
 			const source = fs.readFileSync(filePath, 'utf8');
-			const { data, content } = matter(source);
+			const { data, content, ...blogConfig } = matter(source);
 
 			return {
-				id: uuidv4(),
 				title: data.title,
 				excerpt: data.excerpt || '',
 				coverImage: data.coverImage,
@@ -49,20 +46,14 @@ export async function getAllPosts(): Promise<BlogPost[]> {
 export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
 	try {
 		const filePath = path.join(BLOGS_PATH, `${slug}.mdx`);
-		const source = fs.readFileSync(filePath, 'utf8');
-		const { data, content } = matter(source);
+		const content = fs.readFileSync(filePath, 'utf8');
+		const data = BlogCardList.find((blog) => blog.slug.split('/blogs/').pop() === slug);
+
+		if (!data) return null;
 
 		return {
-			id: uuidv4(),
-			slug,
-			title: data.title,
-			date: data.date,
-			excerpt: data.excerpt || '',
-			coverImage: data.coverImage,
+			...data,
 			content,
-			author: data.author,
-			tags: data.tags,
-			category: data.category,
 		};
 	} catch (error) {
 		console.error('Error fetching post:', error);

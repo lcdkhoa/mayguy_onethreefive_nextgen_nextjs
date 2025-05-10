@@ -1,16 +1,25 @@
 'use client';
 
-import { Box } from '@mui/material';
 import { MDXRemote } from 'next-mdx-remote';
+import { serialize } from 'next-mdx-remote/serialize';
+import { useEffect, useState } from 'react';
 
 interface MDXContentProps {
-	source: any;
+	content: string;
 }
 
-export default function MDXContent({ source }: MDXContentProps) {
-	return (
-		<Box sx={{ mt: 4 }}>
-			<MDXRemote {...source} />
-		</Box>
-	);
+export default function MDXContent({ content }: MDXContentProps) {
+	const [mdxSource, setMdxSource] = useState<any>(null);
+
+	useEffect(() => {
+		const processContent = async () => {
+			const serialized = await serialize(content);
+			setMdxSource(serialized);
+		};
+		processContent();
+	}, [content]);
+
+	if (!mdxSource) return null;
+
+	return <MDXRemote {...mdxSource} />;
 }

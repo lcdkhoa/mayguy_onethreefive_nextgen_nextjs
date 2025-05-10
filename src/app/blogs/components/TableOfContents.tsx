@@ -34,7 +34,7 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
 	return (
 		<Paper elevation={0} sx={{ p: 2, position: 'sticky', top: 100 }}>
 			<Typography variant="h6" gutterBottom>
-				Mục lục
+				Table of Contents
 			</Typography>
 			<List dense>
 				{toc.map((item) => (
@@ -43,9 +43,9 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
 						component="a"
 						href={`#${item.id}`}
 						sx={{
-							pl: (item.level - 1) * 2,
-							color: 'text.secondary',
-							textDecoration: 'none',
+							'pl': (item.level - 1) * 2,
+							'color': 'text.secondary',
+							'textDecoration': 'none',
 							'&:hover': {
 								color: 'primary.main',
 							},

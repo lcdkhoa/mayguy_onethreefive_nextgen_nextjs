@@ -2,10 +2,9 @@
 
 import ToolsCard from '@/components/Cards/ToolsCard';
 import Loading from '@/components/Loading';
-import { Grid, Tab, Tabs, Typography } from '@mui/material';
+import { Container, Grid, Tab, Tabs, Typography } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import ReactGA from 'react-ga4';
 
 import { ToolCardList } from './configs/constants';
 
@@ -34,21 +33,6 @@ export default function Tools({ toolParam }: { toolParam?: string }) {
 	}, [toolParam]);
 
 	useEffect(() => {
-		ReactGA.send({
-			hitType: 'pageview',
-			page: location.pathname,
-			title: 'Tools',
-		});
-	}, []);
-
-	useEffect(() => {
-		ReactGA.event({
-			category: 'Tools',
-			action: 'Click on Object Handler',
-		});
-	}, [toolParam]);
-
-	useEffect(() => {
 		updateFavorites();
 		window.addEventListener('storage', updateFavorites);
 		return () => {
@@ -57,7 +41,7 @@ export default function Tools({ toolParam }: { toolParam?: string }) {
 	}, []);
 
 	return (
-		<>
+		<Container maxWidth="lg">
 			<Loading isLoading={isLoading} />
 			<Grid container justifyContent="center" mt={5}>
 				<Tabs value={tab} onChange={handleTabChange}>
@@ -97,6 +81,6 @@ export default function Tools({ toolParam }: { toolParam?: string }) {
 					);
 				})}
 			</Grid>
-		</>
+		</Container>
 	);
 }

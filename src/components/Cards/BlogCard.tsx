@@ -4,23 +4,11 @@ import IconButton from '@/components/Buttons/IconButton';
 import Loading from '@/components/Loading';
 import { useTheme } from '@/contexts/ThemeContext';
 import { color } from '@/styles/color';
+import { BlogCardProps } from '@/types/card.types';
 import { Book, Favorite, FavoriteBorder, Share } from '@mui/icons-material';
 import { Card, CardActions, CardHeader, CardMedia, Grid, Tooltip, Typography } from '@mui/material';
 import Link from 'next/link';
 import { useState } from 'react';
-
-interface BlogCardProps {
-	id: string;
-	title: string;
-	excerpt: string;
-	coverImage: string;
-	date: string;
-	slug: string;
-	author?: string;
-	tags?: string[];
-	category?: string;
-	featured?: boolean;
-}
 
 export default function BlogCard(blog: BlogCardProps) {
 	const { theme } = useTheme();
