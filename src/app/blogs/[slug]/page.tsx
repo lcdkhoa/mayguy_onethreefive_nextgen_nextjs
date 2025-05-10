@@ -68,7 +68,9 @@ export default async function BlogPost({ params }: { params: { slug: string } })
 							</Typography>
 
 							<Typography variant="subtitle1" color="text.secondary" gutterBottom>
-								{format(new Date(post.date), 'dd MMMM yyyy', { locale: vi })}
+								{post.date
+									? format(new Date(post.date), 'dd MMMM yyyy', { locale: vi })
+									: 'No date'}
 								{post.author && ` • ${post.author}`}
 							</Typography>
 

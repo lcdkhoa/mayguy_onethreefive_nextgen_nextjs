@@ -1,10 +1,12 @@
 import fs from 'fs';
 import matter from 'gray-matter';
 import path from 'path';
+import { v4 as uuidv4 } from 'uuid';
 
 const BLOGS_PATH = path.join(process.cwd(), 'src/app/blogs/content');
 
 export interface BlogPost {
+	id: string;
 	slug: string;
 	title: string;
 	date: string;
@@ -12,6 +14,8 @@ export interface BlogPost {
 	content: string;
 	author?: string;
 	tags?: string[];
+	category?: string;
+	coverImage?: string;
 }
 
 export async function getAllPosts(): Promise<BlogPost[]> {
@@ -26,13 +30,15 @@ export async function getAllPosts(): Promise<BlogPost[]> {
 			const { data, content } = matter(source);
 
 			return {
-				slug: file.replace(/\.mdx$/, ''),
+				id: uuidv4(),
 				title: data.title,
-				date: data.date,
 				excerpt: data.excerpt || '',
+				coverImage: data.coverImage,
+				slug: file.replace(/\.mdx$/, ''),
+				date: data.date,
 				content,
-				author: data.author,
 				tags: data.tags,
+				category: data.category,
 			};
 		})
 		.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
@@ -47,15 +53,19 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
 		const { data, content } = matter(source);
 
 		return {
+			id: uuidv4(),
 			slug,
 			title: data.title,
 			date: data.date,
 			excerpt: data.excerpt || '',
+			coverImage: data.coverImage,
 			content,
 			author: data.author,
 			tags: data.tags,
+			category: data.category,
 		};
 	} catch (error) {
+		console.error('Error fetching post:', error);
 		return null;
 	}
 }

@@ -1,42 +1,48 @@
+'use client';
+
 import IconButton from '@/components/Buttons/IconButton';
 import Loading from '@/components/Loading';
 import { useTheme } from '@/contexts/ThemeContext';
 import { color } from '@/styles/color';
-import { Favorite, FavoriteBorder, PlayArrow, Share } from '@mui/icons-material';
+import { Book, Favorite, FavoriteBorder, Share } from '@mui/icons-material';
 import { Card, CardActions, CardHeader, CardMedia, Grid, Tooltip, Typography } from '@mui/material';
 import Link from 'next/link';
 import { useState } from 'react';
 
-interface ToolCardProps {
+interface BlogCardProps {
 	id: string;
 	title: string;
-	description: string;
+	excerpt: string;
 	coverImage: string;
-	path: string;
-	version: string;
+	date: string;
+	slug: string;
+	author?: string;
+	tags?: string[];
+	category?: string;
+	featured?: boolean;
 }
 
-export default function ToolsCard(tool: ToolCardProps) {
+export default function BlogCard(blog: BlogCardProps) {
 	const { theme } = useTheme();
 	const [favorites, setFavorites] = useState<string[]>([]);
 
 	const [isLoading, setIsLoading] = useState(false);
 
 	const handleShare = (path: string) => {
-		const url = `${window.location.origin}/tools/${path.split('/').pop()}`;
+		const url = `${window.location.origin}/blogs/${path.split('/').pop()}`;
 		navigator.clipboard.writeText(url);
 		alert('Copied link!');
 	};
 
-	const handleFavorite = (toolPath: string) => {
-		let arrFavorites = JSON.parse(localStorage.getItem('favoriteTools') || '[]');
-		if (arrFavorites.includes(toolPath)) {
-			arrFavorites = arrFavorites.filter((f: string) => f !== toolPath);
+	const handleFavorite = (blogId: string) => {
+		let arrFavorites = JSON.parse(localStorage.getItem('favoriteBlogs') || '[]');
+		if (arrFavorites.includes(blogId)) {
+			arrFavorites = arrFavorites.filter((f: string) => f !== blogId);
 		} else {
-			arrFavorites.push(toolPath);
+			arrFavorites.push(blogId);
 		}
 		setFavorites(arrFavorites);
-		localStorage.setItem('favoriteTools', JSON.stringify(arrFavorites));
+		localStorage.setItem('favoriteBlogs', JSON.stringify(arrFavorites));
 		window.dispatchEvent(new Event('storage'));
 	};
 
@@ -44,8 +50,7 @@ export default function ToolsCard(tool: ToolCardProps) {
 		setIsLoading(true);
 	};
 
-	const isFavorite = favorites.includes(tool.path);
-
+	const isFavorite = favorites.includes(blog.id);
 	return (
 		<>
 			<Loading isLoading={isLoading} />
@@ -62,8 +67,8 @@ export default function ToolsCard(tool: ToolCardProps) {
 				}}
 			>
 				<CardHeader
-					title={tool.title}
-					subheader={tool.version}
+					title={blog.title}
+					subheader={blog.date}
 					action={
 						<Grid container spacing={1} alignItems="center">
 							<Grid>
@@ -77,7 +82,7 @@ export default function ToolsCard(tool: ToolCardProps) {
 									<IconButton
 										onClick={(e) => {
 											e.stopPropagation();
-											handleShare(tool.path);
+											handleShare(blog.slug);
 										}}
 									>
 										<Share color="warning" />
@@ -95,7 +100,7 @@ export default function ToolsCard(tool: ToolCardProps) {
 									<IconButton
 										onClick={(e) => {
 											e.stopPropagation();
-											handleFavorite(tool.path);
+											handleFavorite(blog.id);
 										}}
 									>
 										{isFavorite ? <Favorite color="error" /> : <FavoriteBorder />}
@@ -106,13 +111,13 @@ export default function ToolsCard(tool: ToolCardProps) {
 								<Tooltip
 									title={
 										<Typography variant="caption" color="white">
-											Fun start
+											Read more ...
 										</Typography>
 									}
 								>
-									<Link href={tool.path} style={{ color: 'inherit' }} onClick={handlePlay}>
+									<Link href={blog.slug} style={{ color: 'inherit' }} onClick={handlePlay}>
 										<IconButton>
-											<PlayArrow color="info" />
+											<Book color="info" />
 										</IconButton>
 									</Link>
 								</Tooltip>
@@ -124,8 +129,8 @@ export default function ToolsCard(tool: ToolCardProps) {
 					<CardMedia
 						component="img"
 						height="250"
-						image={tool.coverImage}
-						alt={tool.title}
+						image={blog.coverImage}
+						alt={blog.title}
 						sx={{
 							'transition': 'transform 0.2s ease-in-out',
 							'objectFit': 'cover',
@@ -139,7 +144,7 @@ export default function ToolsCard(tool: ToolCardProps) {
 					/>
 				</Grid>
 				<Typography variant="body2" color="text.secondary" textAlign={'justify'} p={2}>
-					{tool.description}
+					{blog.excerpt}
 				</Typography>
 				<CardActions disableSpacing></CardActions>
 			</Card>

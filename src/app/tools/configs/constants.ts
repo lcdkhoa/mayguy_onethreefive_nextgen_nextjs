@@ -19,7 +19,7 @@ export const ToolCardList = [
 		title: 'Object-Handler 360F',
 		description:
 			'Convert complex nested data structures into flat formats and vice versa. This tool only adapt with 360F data structure.',
-		imageUrl: '/images/cards/object_handler.png',
+		coverImage: '/images/cards/object_handler.png',
 		component: ObjectHandler,
 		path: '/tools/object-handler-360f',
 		isSelected: false,
@@ -31,7 +31,7 @@ export const ToolCardList = [
 		title: 'Swagger-Creator',
 		description:
 			'Fill in some needed Information of API, this tool will help creating Yaml Swagger file 3.0',
-		imageUrl: '/images/cards/swagger_converter.png',
+		coverImage: '/images/cards/swagger_converter.png',
 		component: SwaggerCreator,
 		path: '/tools/swagger-creator',
 		isSelected: false,
@@ -43,7 +43,7 @@ export const ToolCardList = [
 		title: 'Object-Handler PlayGround',
 		description:
 			'Convert complex nested data structures into flat formats and vice versa, to enhance simplicity and efficiency in data management.',
-		imageUrl: '/images/cards/object_handler_playground.jpg',
+		coverImage: '/images/cards/object_handler_playground.jpg',
 		component: ObjectHandlerPlayGround,
 		path: '/tools/object-handler',
 		isSelected: false,
