@@ -5,7 +5,7 @@ import { useDevice } from '@/contexts/DeviceContext';
 import { Grid, Typography } from '@mui/material';
 import Image from 'next/image';
 
-export default function Home() {
+export default function NotFound() {
 	const { isMobile } = useDevice();
 	return (
 		<Grid

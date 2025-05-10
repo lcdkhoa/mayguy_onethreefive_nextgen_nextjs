@@ -11,12 +11,11 @@ import OptionPopover from './components/OptionsPopover';
 
 interface ObjectHandlerProps {
 	open: boolean;
-	close: (index: number) => void;
-	index: number;
+	close: () => void;
 }
 
 export default function ObjectHandler({ ...props }: ObjectHandlerProps) {
-	const { open, close, index } = props;
+	const { open, close } = props;
 	const [text, setText] = useState('');
 
 	const [toolbarOptionsAnchorEl, setToolbarOptionsAnchorEl] = useState<HTMLButtonElement | null>(
@@ -41,7 +40,7 @@ export default function ObjectHandler({ ...props }: ObjectHandlerProps) {
 	const id = openOption ? 'simple-popover' : 'none';
 
 	const handleClose = () => {
-		close(index);
+		close();
 		setText('');
 	};
 

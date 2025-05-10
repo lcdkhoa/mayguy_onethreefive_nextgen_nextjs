@@ -22,8 +22,7 @@ import { ToolSwaggers } from '../../configs/constants';
 
 interface SwaggerCreatorProps {
 	open: boolean;
-	close: (index: number) => void;
-	index: number;
+	close: () => void;
 }
 
 interface SwaggerFormValues {
@@ -55,14 +54,14 @@ const CustomAccordionSummary = styled(AccordionSummary)(() => ({
 }));
 
 export default function SwaggerCreator({ ...props }: SwaggerCreatorProps) {
-	const { open, close, index } = props;
+	const { open, close } = props;
 	const { getValues, setValue } = useForm<SwaggerFormValues>({
 		defaultValues: {},
 	});
 	// const watchAllFields = watch();
 
 	const handleClose = () => {
-		close(index);
+		close();
 	};
 
 	const handleSubmit = () => {
