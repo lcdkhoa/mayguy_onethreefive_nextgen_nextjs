@@ -10,7 +10,6 @@ import { useState } from 'react';
 
 export default function ToolsCard(tool: ToolCardProps) {
 	const { theme } = useTheme();
-	const [favorites, setFavorites] = useState<string[]>([]);
 
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -27,7 +26,6 @@ export default function ToolsCard(tool: ToolCardProps) {
 		} else {
 			arrFavorites.push(toolPath);
 		}
-		setFavorites(arrFavorites);
 		localStorage.setItem('favoriteTools', JSON.stringify(arrFavorites));
 		window.dispatchEvent(new Event('storage'));
 	};
@@ -36,7 +34,7 @@ export default function ToolsCard(tool: ToolCardProps) {
 		setIsLoading(true);
 	};
 
-	const isFavorite = favorites.includes(tool.path);
+	const isFavorite = JSON.parse(localStorage.getItem('favoriteTools') || '[]').includes(tool.path);
 
 	return (
 		<>

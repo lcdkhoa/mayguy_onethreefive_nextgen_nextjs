@@ -12,7 +12,6 @@ import { useState } from 'react';
 
 export default function BlogCard(blog: BlogCardProps) {
 	const { theme } = useTheme();
-	const [favorites, setFavorites] = useState<string[]>([]);
 
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -29,7 +28,6 @@ export default function BlogCard(blog: BlogCardProps) {
 		} else {
 			arrFavorites.push(blogId);
 		}
-		setFavorites(arrFavorites);
 		localStorage.setItem('favoriteBlogs', JSON.stringify(arrFavorites));
 		window.dispatchEvent(new Event('storage'));
 	};
@@ -38,7 +36,7 @@ export default function BlogCard(blog: BlogCardProps) {
 		setIsLoading(true);
 	};
 
-	const isFavorite = favorites.includes(blog.id);
+	const isFavorite = JSON.parse(localStorage.getItem('favoriteBlogs') || '[]').includes(blog.slug);
 	return (
 		<>
 			<Loading isLoading={isLoading} />
