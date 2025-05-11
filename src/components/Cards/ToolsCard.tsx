@@ -1,3 +1,5 @@
+'use client';
+
 import IconButton from '@/components/Buttons/IconButton';
 import Loading from '@/components/Loading';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -8,15 +10,18 @@ import { Card, CardActions, CardHeader, CardMedia, Grid, Tooltip, Typography } f
 import Link from 'next/link';
 import { useState } from 'react';
 
+import ShareDialog from './SharePopup';
+
 export default function ToolsCard(tool: ToolCardProps) {
 	const { theme } = useTheme();
-
+	const [openShare, setOpenShare] = useState(false);
+	const [url, setUrl] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
 
 	const handleShare = (path: string) => {
 		const url = `${window.location.origin}/tools/${path.split('/').pop()}`;
-		navigator.clipboard.writeText(url);
-		alert('Copied link!');
+		setUrl(url);
+		setOpenShare(true);
 	};
 
 	const handleFavorite = (toolPath: string) => {
@@ -46,6 +51,7 @@ export default function ToolsCard(tool: ToolCardProps) {
 
 	return (
 		<>
+			<ShareDialog open={openShare} onClose={() => setOpenShare(false)} url={url} />
 			<Loading isLoading={isLoading} />
 			<Card
 				sx={{
