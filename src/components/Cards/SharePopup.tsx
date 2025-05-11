@@ -2,7 +2,6 @@ import IconButton from '@/components/Buttons/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import FacebookIcon from '@mui/icons-material/Facebook';
-import QrCodeIcon from '@mui/icons-material/QrCode';
 import { Box, Dialog, DialogContent, DialogTitle, Grid, Snackbar, Typography } from '@mui/material';
 import React, { useState } from 'react';
 
