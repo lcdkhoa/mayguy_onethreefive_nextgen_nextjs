@@ -14,3 +14,22 @@
 
 `npm run build`
 
+## 5. Deploy
+
+Clone the repository to your local machine.
+
+Create PR to master branch.
+
+Once PR is merged, the changes will be deployed to Vercel automatically.
+
+## 6. Project Structure
+
+```
+src/
+├── app/
+├── components/
+├── pages/
+├── styles/
+└── types/
+└── utils/
+```
