@@ -25,6 +25,7 @@ export default function UrlOriginRevealer({ ...props }: UrlOriginRevealerProps) 
 	const [originalUrl, setOriginalUrl] = useState('');
 	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
+	const [showSecurityForInput, setShowSecurityForInput] = useState(false);
 
 	const handleClose = () => {
 		close();
@@ -39,6 +40,7 @@ export default function UrlOriginRevealer({ ...props }: UrlOriginRevealerProps) 
 		setLoading(true);
 		setOriginalUrl('');
 		setError('');
+		setShowSecurityForInput(false);
 
 		try {
 			const response = await fetch('/api/tools/url-origin', {
@@ -52,13 +54,20 @@ export default function UrlOriginRevealer({ ...props }: UrlOriginRevealerProps) 
 			const data = await response.json();
 
 			if (!response.ok) {
-				throw new Error(data.error || 'Failed to check URL');
+				if (response.status === 404) {
+					setError('');
+					setShowSecurityForInput(true);
+				} else {
+					throw new Error(data.error || 'Failed to check URL');
+				}
+				return;
 			}
 
 			if (data.originalUrl) {
 				setOriginalUrl(data.originalUrl);
 			} else {
 				setError('Cannot find the original URL. It might not be a shortened URL.');
+				setShowSecurityForInput(true);
 			}
 		} catch (err: unknown) {
 			const errorMessage = err instanceof Error ? err.message : 'Unknown error';
@@ -88,14 +97,30 @@ export default function UrlOriginRevealer({ ...props }: UrlOriginRevealerProps) 
 					placeholder="Paste the shortened URL here (e.g. https://tinyurl.com/...)"
 					margin="normal"
 				/>
-				{originalUrl && (
-					<>
-						<Typography variant="body1" color="success.main" sx={{ mt: 2 }}>
-							<strong>Original URL:</strong>{' '}
-							<a href={originalUrl} target="_blank" rel="noopener noreferrer">
-								{originalUrl}
-							</a>
-						</Typography>
+				{(originalUrl || showSecurityForInput) && (
+					<Grid sx={{ width: 'auto' }}>
+						{originalUrl && (
+							<Typography
+								variant="body1"
+								color="success.main"
+								sx={{
+									mt: 2,
+									width: '100%',
+									wordBreak: 'break-word',
+									whiteSpace: 'pre-wrap',
+								}}
+							>
+								<strong>Original URL:</strong>{' '}
+								<a href={originalUrl} target="_blank" rel="noopener noreferrer">
+									{originalUrl}
+								</a>
+							</Typography>
+						)}
+						{showSecurityForInput && (
+							<Typography variant="body1" color="warning.main" sx={{ mt: 2 }}>
+								This link may not be shortened. You can still check its security below.
+							</Typography>
+						)}
 						<Grid
 							container
 							spacing={2}
@@ -114,7 +139,11 @@ export default function UrlOriginRevealer({ ...props }: UrlOriginRevealerProps) 
 										arrow
 									>
 										<ButtonWithLink
-											url={typeof service.url === 'string' ? service.url : service.url(originalUrl)}
+											url={
+												typeof service.url === 'string'
+													? service.url
+													: service.url(originalUrl || shortUrl)
+											}
 											sx={{
 												'backgroundColor': service.color,
 												'&:hover': { backgroundColor: service.color },
@@ -129,7 +158,7 @@ export default function UrlOriginRevealer({ ...props }: UrlOriginRevealerProps) 
 								</Grid>
 							))}
 						</Grid>
-					</>
+					</Grid>
 				)}
 				{error && (
 					<Typography variant="body1" color="error" sx={{ mt: 2 }}>
