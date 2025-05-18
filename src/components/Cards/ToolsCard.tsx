@@ -56,7 +56,7 @@ export default function ToolsCard(tool: ToolCardProps) {
 			<Card
 				sx={{
 					'width': 500,
-					'height': 420,
+					'height': 370,
 					'borderRadius': '20px',
 					'margin': '10px',
 					'overflow': 'hidden',
@@ -124,10 +124,10 @@ export default function ToolsCard(tool: ToolCardProps) {
 						</Grid>
 					}
 				/>
-				<Grid style={{ height: 250, overflow: 'hidden' }}>
+				<Grid style={{ height: 200, overflow: 'hidden' }}>
 					<CardMedia
 						component="img"
-						height="250"
+						height="200"
 						image={tool.coverImage}
 						alt={tool.title}
 						sx={{

@@ -12,6 +12,7 @@ import WarningIcon from '@mui/icons-material/Warning';
 import ObjectHandler from '../components/ObjectHandler';
 import ObjectHandlerPlayGround from '../components/ObjectHandlerPlayGround';
 import SwaggerCreator from '../components/SwaggerCreator';
+import UrlOriginRevealer from '../components/UrlOriginRevealer';
 
 export const ToolCardList = [
 	{
@@ -48,6 +49,18 @@ export const ToolCardList = [
 		path: '/tools/object-handler',
 		isSelected: false,
 		version: 'v1.0.2',
+		category: 'Tools',
+	},
+	{
+		id: '346f86db-dfb6-41bf-8b3e-469906e3b97f',
+		title: 'URL Original Revealer',
+		description:
+			'Reveal the original URL of a shortened URL like bit.ly, tinyurl, etc. to avoid the risk of phishing attacks.',
+		coverImage: '/images/cards/url_original_revealer.jpg',
+		component: UrlOriginRevealer,
+		path: '/tools/url-original-revealer',
+		isSelected: false,
+		version: 'v1.0.0',
 		category: 'Tools',
 	},
 ];
