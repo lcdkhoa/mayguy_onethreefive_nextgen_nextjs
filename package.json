@@ -19,6 +19,7 @@
 		"@mui/icons-material": "^7.0.2",
 		"@mui/material": "^7.0.2",
 		"@next/mdx": "^15.3.2",
+		"@next/swc-win32-x64-msvc": "^15.3.3",
 		"axios": "^1.9.0",
 		"date-fns": "^4.1.0",
 		"gray-matter": "^4.0.3",

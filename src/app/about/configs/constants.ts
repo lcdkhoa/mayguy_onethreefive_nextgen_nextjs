@@ -13,3 +13,5 @@ export const ABOUT_ME_SIXTH = 'Connect with me on:';
 export const LINKEDIN_URL = 'https://www.linkedin.com/in/lcdkhoa';
 export const GITHUB_URL = 'https://github.com/lcdkhoa';
 export const EMAIL_URL = 'mailto:lcdkhoa@hotmail.com';
+export const BUY_ME_COFFEE_TEXT = 'Buy me a coffee:';
+export const BUY_ME_A_COFFEE_URL = 'https://www.buymeacoffee.com/lcdkhoa';
