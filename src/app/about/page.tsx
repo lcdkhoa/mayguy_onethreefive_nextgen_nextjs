@@ -1,7 +1,7 @@
 'use client';
 
 import ButtonWithLink from '@/components/Buttons/ButtonWithLink';
-import { Email, GitHub, LinkedIn } from '@mui/icons-material';
+import { Coffee, Email, GitHub, LinkedIn } from '@mui/icons-material';
 import { Box, Grid, Typography } from '@mui/material';
 
 import {
@@ -14,6 +14,8 @@ import {
 	ABOUT_ME_SIXTH,
 	ABOUT_ME_THIRD,
 	ABOUT_SPACE,
+	BUY_ME_A_COFFEE_URL,
+	BUY_ME_COFFEE_TEXT,
 	EMAIL_URL,
 	GITHUB_URL,
 	LINKEDIN_URL,
@@ -64,6 +66,13 @@ export default function About() {
 					</ButtonWithLink>
 					<ButtonWithLink url={EMAIL_URL}>
 						<Email color="primary" fontSize="small" />
+					</ButtonWithLink>
+				</span>
+
+				<span style={{ display: 'flex', gap: 5, alignItems: 'center' }}>
+					<Typography variant="body1">{BUY_ME_COFFEE_TEXT}</Typography>
+					<ButtonWithLink url={BUY_ME_A_COFFEE_URL}>
+						<Coffee color="primary" fontSize="small" />
 					</ButtonWithLink>
 				</span>
 			</Box>
