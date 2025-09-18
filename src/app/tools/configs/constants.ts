@@ -63,6 +63,17 @@ export const ToolCardList = [
 		version: 'v1.0.0',
 		category: 'Tools',
 	},
+	{
+		id: '346f86db-dfb6-41bf-8b3e-469906e3b97g',
+		title: 'APTIS Practice',
+		description: 'APTIS Practice is a tool that helps you practice for the APTIS exam.',
+		coverImage: '/images/cards/aptis-british-council.jpg',
+		component: null,
+		path: 'https://thi-thu-aptis.vercel.app/',
+		isSelected: false,
+		version: 'v1.0.0',
+		category: 'Tools',
+	},
 ];
 
 export const ToolSwaggers = [
