@@ -77,7 +77,9 @@ export default function Tools({ toolParam }: { toolParam?: string }) {
 					const isSelected = tool.path.split('/').pop() === toolParam;
 					return (
 						<Grid key={tool.path}>
-							{isSelected && <tool.component open={isSelected} close={handleClose} />}
+							{isSelected && tool.component && (
+								<tool.component open={isSelected} close={handleClose} />
+							)}
 							<ToolsCard {...tool} />
 						</Grid>
 					);
