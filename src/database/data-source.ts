@@ -4,7 +4,10 @@ import { DataSource } from 'typeorm';
 
 // Database configuration
 export const AppDataSource = new DataSource({
-	type: (process.env.DATABASE_TYPE as 'postgres') || 'postgres',
+	type: 'postgres',
+	// Use connection string if available (recommended for Supabase)
+	url: process.env.DATABASE_URL,
+	// Fallback to individual parameters
 	host: process.env.DATABASE_HOST,
 	port: parseInt(process.env.DATABASE_PORT || '5432'),
 	username: process.env.DATABASE_USER,
@@ -14,20 +17,38 @@ export const AppDataSource = new DataSource({
 	entities: [User, BlogPost],
 	migrations: ['src/migrations/*.ts'],
 	subscribers: ['src/subscribers/*.ts'],
-	ssl: {
-		rejectUnauthorized: false,
-	},
+	ssl:
+		process.env.NODE_ENV === 'production'
+			? {
+					rejectUnauthorized: false,
+				}
+			: false,
 });
 
 export const initializeDatabase = async (): Promise<DataSource> => {
 	try {
 		if (!AppDataSource.isInitialized) {
+			// Log database configuration for debugging
+			console.log('🔍 Database configuration:', {
+				type: process.env.DATABASE_TYPE,
+				host: process.env.DATABASE_HOST,
+				port: process.env.DATABASE_PORT,
+				database: process.env.DATABASE_NAME,
+				ssl: process.env.NODE_ENV === 'production' ? 'enabled' : 'disabled',
+			});
+
 			await AppDataSource.initialize();
 			console.log('✅ Database connection established successfully');
 		}
 		return AppDataSource;
 	} catch (error) {
 		console.error('❌ Error during database initialization:', error);
+		console.error('❌ Database config:', {
+			host: process.env.DATABASE_HOST,
+			port: process.env.DATABASE_PORT,
+			database: process.env.DATABASE_NAME,
+			ssl: process.env.NODE_ENV === 'production' ? 'enabled' : 'disabled',
+		});
 		throw error;
 	}
 };
