@@ -1,16 +1,16 @@
 import { BlogPostService } from '@/app/api/blog-posts/blog-post.service';
 import { UserService } from '@/app/api/users/user.service';
-import { initializeDatabase } from '@/database/data-source';
+import dbConnection from '@/database/data-source';
 
 export async function seedDatabase() {
 	try {
 		console.log('🌱 Starting database seeding...');
 
 		// Initialize database
-		await initializeDatabase();
+		const dataSource = await dbConnection.getDataSource();
 
-		const userService = new UserService();
-		const blogPostService = new BlogPostService();
+		const userService = new UserService(dataSource);
+		const blogPostService = new BlogPostService(dataSource);
 
 		// Create sample users
 		const users = [

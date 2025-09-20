@@ -1,12 +1,11 @@
 import { BlogPost } from '@/app/api/blog-posts/blog-posts.entity';
-import { AppDataSource } from '@/database/data-source';
-import { Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 
 export class BlogPostService {
 	private blogPostRepository: Repository<BlogPost>;
 
-	constructor() {
-		this.blogPostRepository = AppDataSource.getRepository(BlogPost);
+	constructor(dataSource: DataSource) {
+		this.blogPostRepository = dataSource.getRepository(BlogPost);
 	}
 
 	// Create a new blog post
@@ -34,7 +33,6 @@ export class BlogPostService {
 	// Get all blog posts
 	async getAllBlogPosts(): Promise<BlogPost[]> {
 		return await this.blogPostRepository.find({
-			relations: ['author'],
 			order: { createdAt: 'DESC' },
 		});
 	}
@@ -43,7 +41,6 @@ export class BlogPostService {
 	async getPublishedBlogPosts(): Promise<BlogPost[]> {
 		return await this.blogPostRepository.find({
 			where: { isPublished: true },
-			relations: ['author'],
 			order: { publishedAt: 'DESC' },
 		});
 	}
@@ -52,7 +49,6 @@ export class BlogPostService {
 	async getBlogPostsByAuthor(authorId: string): Promise<BlogPost[]> {
 		return await this.blogPostRepository.find({
 			where: { authorId },
-			relations: ['author'],
 			order: { createdAt: 'DESC' },
 		});
 	}
@@ -61,7 +57,6 @@ export class BlogPostService {
 	async getBlogPostsByCategory(category: string): Promise<BlogPost[]> {
 		return await this.blogPostRepository.find({
 			where: { category },
-			relations: ['author'],
 			order: { createdAt: 'DESC' },
 		});
 	}

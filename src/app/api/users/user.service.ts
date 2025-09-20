@@ -1,12 +1,11 @@
 import { User } from '@/app/api/users/users.entity';
-import { AppDataSource } from '@/database/data-source';
-import { Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 
 export class UserService {
 	private userRepository: Repository<User>;
 
-	constructor() {
-		this.userRepository = AppDataSource.getRepository(User);
+	constructor(dataSource: DataSource) {
+		this.userRepository = dataSource.getRepository(User);
 	}
 
 	// Create a new user
@@ -19,7 +18,6 @@ export class UserService {
 	async getUserById(id: string): Promise<User | null> {
 		return await this.userRepository.findOne({
 			where: { id },
-			relations: ['blogPosts'],
 		});
 	}
 
@@ -27,14 +25,12 @@ export class UserService {
 	async getUserByEmail(email: string): Promise<User | null> {
 		return await this.userRepository.findOne({
 			where: { email },
-			relations: ['blogPosts'],
 		});
 	}
 
 	// Get all users
 	async getAllUsers(): Promise<User[]> {
 		return await this.userRepository.find({
-			relations: ['blogPosts'],
 			order: { createdAt: 'DESC' },
 		});
 	}
@@ -55,7 +51,6 @@ export class UserService {
 	async getActiveUsers(): Promise<User[]> {
 		return await this.userRepository.find({
 			where: { isActive: true },
-			relations: ['blogPosts'],
 			order: { createdAt: 'DESC' },
 		});
 	}

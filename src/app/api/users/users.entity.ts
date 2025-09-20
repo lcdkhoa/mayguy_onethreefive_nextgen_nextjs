@@ -4,14 +4,7 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  OneToMany,
 } from 'typeorm';
-
-// Forward declaration to avoid circular import
-interface BlogPost {
-  id: string;
-  author: User;
-}
 
 @Entity('users')
 export class User {
@@ -44,8 +37,4 @@ export class User {
 
   @UpdateDateColumn()
   updatedAt: Date;
-
-  // Relations
-  @OneToMany('BlogPost', 'author')
-  blogPosts: BlogPost[];
 }

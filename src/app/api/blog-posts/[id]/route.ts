@@ -1,5 +1,5 @@
 import { BlogPostService } from '@/app/api/blog-posts/blog-post.service';
-import { initializeDatabase } from '@/database/data-source';
+import dbConnection from '@/database/data-source';
 import { NextRequest, NextResponse } from 'next/server';
 
 // Initialize database connection
@@ -7,8 +7,8 @@ let blogPostService: BlogPostService;
 
 const initService = async () => {
 	if (!blogPostService) {
-		await initializeDatabase();
-		blogPostService = new BlogPostService();
+		const dataSource = await dbConnection.getDataSource();
+		blogPostService = new BlogPostService(dataSource);
 	}
 };
 

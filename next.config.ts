@@ -15,13 +15,14 @@ const nextConfig: NextConfig = {
 	pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
 	// Ensure environment variables are available at build time
 	env: {
-		DATABASE_TYPE: process.env.DATABASE_TYPE,
-		DATABASE_HOST: process.env.DATABASE_HOST,
-		DATABASE_PORT: process.env.DATABASE_PORT,
-		DATABASE_USER: process.env.DATABASE_USER,
-		DATABASE_PASSWORD: process.env.DATABASE_PASSWORD,
-		DATABASE_NAME: process.env.DATABASE_NAME,
-		DATABASE_LOGGING: process.env.DATABASE_LOGGING,
+		DATABASE_URL: process.env.DATABASE_URL,
+	},
+	// Webpack configuration for TypeORM
+	webpack: (config, { isServer }) => {
+		if (isServer) {
+			config.externals.push('typeorm');
+		}
+		return config;
 	},
 };
 

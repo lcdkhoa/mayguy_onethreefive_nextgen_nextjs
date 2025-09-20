@@ -4,10 +4,7 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToOne,
-  JoinColumn,
 } from 'typeorm';
-import { User } from '../users/users.entity';
 
 @Entity('blog_posts')
 export class BlogPost {
@@ -52,11 +49,6 @@ export class BlogPost {
 
   @Column({ type: 'timestamp', nullable: true })
   publishedAt: Date;
-
-  // Relations
-  @ManyToOne(() => User, (user) => user.blogPosts, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'authorId' })
-  author: User;
 
   @Column({ type: 'uuid' })
   authorId: string;

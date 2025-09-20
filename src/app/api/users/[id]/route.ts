@@ -1,5 +1,5 @@
 import { UserService } from '@/app/api/users/user.service';
-import { initializeDatabase } from '@/database/data-source';
+import dbConnection from '@/database/data-source';
 import { NextRequest, NextResponse } from 'next/server';
 
 // Initialize database connection
@@ -7,8 +7,8 @@ let userService: UserService;
 
 const initService = async () => {
 	if (!userService) {
-		await initializeDatabase();
-		userService = new UserService();
+		const dataSource = await dbConnection.getDataSource();
+		userService = new UserService(dataSource);
 	}
 };
 
