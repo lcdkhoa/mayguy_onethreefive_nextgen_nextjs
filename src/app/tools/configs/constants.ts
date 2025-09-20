@@ -69,7 +69,7 @@ export const ToolCardList = [
 		description: 'APTIS Practice is a tool that helps you practice for the APTIS exam.',
 		coverImage: '/images/cards/aptis-british-council.jpg',
 		component: null,
-		path: 'https://aptis-mu.vercel.app?loginType=url&username=admin&password=#admin@123',
+		path: 'https://aptis-mu.vercel.app?loginType=url&username=admin&password=admin@123',
 		isSelected: false,
 		version: 'v1.0.0',
 		category: 'Tools',
