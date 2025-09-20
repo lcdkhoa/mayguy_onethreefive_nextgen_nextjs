@@ -1,5 +1,6 @@
 export const ABOUT_SPACE = 'About me';
-export const ABOUT_ME_FIRST = 'Hi, I am Dang Khoa, call me Charlie for short.';
+export const ABOUT_ME_FIRST = "Hi, I'm Dang Khoa,";
+export const ABOUT_ME_FIRST_CALL_ME = 'Call me Charlie for short.';
 export const ABOUT_ME_SECOND_PREFIX = 'I am a full-stack developer at';
 export const ABOUT_ME_SECOND_LINK_TEXT = '360F';
 export const ABOUT_ME_SECOND_SUFFIX =

@@ -2,18 +2,19 @@
 
 import ButtonWithLink from '@/components/Buttons/ButtonWithLink';
 import { Coffee, Email, GitHub, LinkedIn } from '@mui/icons-material';
-import { Box, Grid, Typography } from '@mui/material';
+import { Avatar, Grid, Typography } from '@mui/material';
+import Image from 'next/image';
 
 import {
 	ABOUT_ME_FIFTH,
 	ABOUT_ME_FIRST,
+	ABOUT_ME_FIRST_CALL_ME,
 	ABOUT_ME_FOURTH,
 	ABOUT_ME_SECOND_LINK_TEXT,
 	ABOUT_ME_SECOND_PREFIX,
 	ABOUT_ME_SECOND_SUFFIX,
 	ABOUT_ME_SIXTH,
 	ABOUT_ME_THIRD,
-	ABOUT_SPACE,
 	BUY_ME_A_COFFEE_URL,
 	BUY_ME_COFFEE_TEXT,
 	EMAIL_URL,
@@ -29,12 +30,40 @@ export default function About() {
 			sx={{ overflow: 'hidden', display: 'flex', flexDirection: 'row' }}
 			mt={10}
 		>
-			<Box>
-				<Typography variant="h3" gutterBottom color="text.primary">
-					{ABOUT_SPACE}
-				</Typography>
-				<Typography variant="body1">{ABOUT_ME_FIRST}</Typography>
-				<Typography variant="body1">
+			<Grid>
+				<Grid container>
+					<Grid size={3} justifyItems={'center'} alignItems={'center'}>
+						<Avatar
+							sx={{
+								width: { xs: 120, sm: 140, md: 160 },
+								height: { xs: 120, sm: 140, md: 160 },
+								border: '3px solid',
+								borderColor: 'primary.main',
+								boxShadow: '0 8px 16px rgba(0,0,0,0.15)',
+								transition: 'all 0.3s ease-in-out',
+								flexShrink: 0,
+							}}
+						>
+							<Image
+								src="/images/about/avatar.png"
+								alt="Dang Khoa (Charlie) - Full-stack Developer"
+								width={180}
+								height={180}
+								style={{
+									width: '100%',
+									height: '100%',
+									objectFit: 'cover',
+								}}
+							/>
+						</Avatar>
+					</Grid>
+
+					<Grid size={9} alignItems={'center'} alignContent={'center'}>
+						<Typography variant="h3">{ABOUT_ME_FIRST}</Typography>
+						<Typography variant="h4">{ABOUT_ME_FIRST_CALL_ME}</Typography>
+					</Grid>
+				</Grid>
+				<Typography variant="body1" mt={2}>
 					{ABOUT_ME_SECOND_PREFIX}{' '}
 					<a
 						href="https://360f.com"
@@ -75,7 +104,7 @@ export default function About() {
 						<Coffee color="primary" fontSize="small" />
 					</ButtonWithLink>
 				</span>
-			</Box>
+			</Grid>
 		</Grid>
 	);
 }
