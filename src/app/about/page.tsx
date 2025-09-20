@@ -2,8 +2,9 @@
 
 import ButtonWithLink from '@/components/Buttons/ButtonWithLink';
 import { Coffee, Email, GitHub, LinkedIn } from '@mui/icons-material';
-import { Avatar, Grid, Typography } from '@mui/material';
+import { Avatar, Grid, Skeleton, Typography } from '@mui/material';
 import Image from 'next/image';
+import { useState } from 'react';
 
 import {
 	ABOUT_ME_FIFTH,
@@ -23,6 +24,12 @@ import {
 } from './configs/constants';
 
 export default function About() {
+	const [imageLoading, setImageLoading] = useState(true);
+
+	const handleImageLoad = () => {
+		setImageLoading(false);
+	};
+
 	return (
 		<Grid
 			justifyContent={'center'}
@@ -42,8 +49,23 @@ export default function About() {
 								boxShadow: '0 8px 16px rgba(0,0,0,0.15)',
 								transition: 'all 0.3s ease-in-out',
 								flexShrink: 0,
+								position: 'relative',
+								overflow: 'hidden',
 							}}
 						>
+							{imageLoading && (
+								<Skeleton
+									variant="circular"
+									width="100%"
+									height="100%"
+									sx={{
+										position: 'absolute',
+										top: 0,
+										left: 0,
+										zIndex: 1,
+									}}
+								/>
+							)}
 							<Image
 								src="/images/about/avatar.png"
 								alt="Dang Khoa (Charlie) - Full-stack Developer"
@@ -53,7 +75,10 @@ export default function About() {
 									width: '100%',
 									height: '100%',
 									objectFit: 'cover',
+									opacity: imageLoading ? 0 : 1,
+									transition: 'opacity 0.3s ease-in-out',
 								}}
+								onLoad={handleImageLoad}
 							/>
 						</Avatar>
 					</Grid>
