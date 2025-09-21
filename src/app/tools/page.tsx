@@ -2,13 +2,16 @@
 
 import ToolsCard from '@/components/Cards/ToolsCard';
 import Loading from '@/components/Loading';
+import { Search } from '@mui/icons-material';
 import {
 	Box,
 	Container,
 	Fade,
+	InputAdornment,
 	Slide,
 	Tab,
 	Tabs,
+	TextField,
 	Typography,
 	useMediaQuery,
 	useTheme,
@@ -23,6 +26,7 @@ export default function Tools({ toolParam }: { toolParam?: string }) {
 	const [tab, setTab] = useState(0);
 	const [favorites, setFavorites] = useState<string[]>([]);
 	const [mounted, setMounted] = useState(false);
+	const [searchQuery, setSearchQuery] = useState('');
 	const router = useRouter();
 	const theme = useTheme();
 	const isMobile = useMediaQuery(theme.breakpoints.down('md'));
@@ -36,6 +40,11 @@ export default function Tools({ toolParam }: { toolParam?: string }) {
 
 	const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
 		setTab(newValue);
+		setSearchQuery(''); // Reset search when switching tabs
+	};
+
+	const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setSearchQuery(event.target.value);
 	};
 
 	const handleClose = () => {
@@ -60,8 +69,21 @@ export default function Tools({ toolParam }: { toolParam?: string }) {
 		return <Loading isLoading={true} />;
 	}
 
-	const filteredTools =
+	// Get base tools list based on tab
+	const baseTools =
 		tab === 0 ? ToolCardList : ToolCardList.filter((tool) => favorites.includes(tool.path));
+
+	// Filter by search query
+	const filteredTools = baseTools.filter((tool) => {
+		if (!searchQuery.trim()) return true;
+		const query = searchQuery.toLowerCase();
+		return (
+			tool.title.toLowerCase().includes(query) ||
+			tool.description.toLowerCase().includes(query) ||
+			tool.category.toLowerCase().includes(query) ||
+			tool.version.toLowerCase().includes(query)
+		);
+	});
 
 	return (
 		<Box
@@ -101,98 +123,164 @@ export default function Tools({ toolParam }: { toolParam?: string }) {
 								mb: 2,
 							}}
 						>
-							Developer Tools
+							Playground corner
 						</Typography>
 						<Typography
 							variant="h6"
 							color="text.secondary"
 							sx={{ maxWidth: 600, mx: 'auto', lineHeight: 1.6 }}
 						>
-							Bộ công cụ phát triển mạnh mẽ và tiện ích cho developers
+							Mini-tools which make coding, learning, and daily life easier
 						</Typography>
 					</Box>
 				</Fade>
 
-				{/* Tabs Section */}
+				{/* Tabs and Search Section */}
 				<Slide direction="down" in={mounted} timeout={1000}>
-					<Box display="flex" justifyContent="center" mb={4}>
-						<Tabs
-							value={tab}
-							onChange={handleTabChange}
-							variant={isMobile ? 'fullWidth' : 'standard'}
+					<Box mb={4}>
+						{/* Combined Search and Tabs */}
+						<Box
+							display="flex"
+							alignItems="center"
+							justifyContent="center"
+							flexDirection={{ xs: 'column', md: 'row' }}
+							gap={{ xs: 2, md: 2 }}
 							sx={{
-								'& .MuiTabs-indicator': {
-									height: 3,
-									borderRadius: '3px 3px 0 0',
-									background: `linear-gradient(90deg, 
-										${theme.palette.primary.main} 0%, 
-										${theme.palette.secondary.main} 100%)`,
-								},
-								'& .MuiTab-root': {
-									'textTransform': 'none',
-									'fontWeight': 600,
-									'fontSize': '1rem',
-									'minHeight': 48,
-									'px': 3,
-									'&.Mui-selected': {
-										color: theme.palette.primary.main,
-									},
-									'&:hover': {
-										backgroundColor: theme.palette.action.hover,
-										borderRadius: '8px 8px 0 0',
-									},
-								},
+								px: { xs: 1, md: 0 },
 							}}
 						>
-							<Tab
-								label={
-									<Box display="flex" alignItems="center" gap={1}>
-										<Typography variant="subtitle1" fontWeight="inherit">
-											All Tools
-										</Typography>
-										<Box
-											sx={{
-												px: 1,
-												py: 0.5,
-												bgcolor: theme.palette.primary.main,
-												color: 'white',
-												borderRadius: '12px',
-												fontSize: '0.75rem',
-												fontWeight: 600,
-												minWidth: 20,
-												textAlign: 'center',
-											}}
-										>
-											{ToolCardList.length}
-										</Box>
-									</Box>
-								}
-							/>
-							<Tab
-								label={
-									<Box display="flex" alignItems="center" gap={1}>
-										<Typography variant="subtitle1" fontWeight="inherit">
-											Favorites
-										</Typography>
-										<Box
-											sx={{
-												px: 1,
-												py: 0.5,
-												bgcolor: theme.palette.error.main,
-												color: 'white',
-												borderRadius: '12px',
-												fontSize: '0.75rem',
-												fontWeight: 600,
-												minWidth: 20,
-												textAlign: 'center',
-											}}
-										>
-											{favorites.length}
-										</Box>
-									</Box>
-								}
-							/>
-						</Tabs>
+							{/* Search Bar */}
+							<Box
+								sx={{
+									width: { xs: '100%', md: '350px' },
+									flexShrink: 0,
+								}}
+							>
+								<TextField
+									fullWidth
+									variant="outlined"
+									placeholder="Tìm kiếm công cụ..."
+									value={searchQuery}
+									onChange={handleSearchChange}
+									sx={{
+										'& .MuiOutlinedInput-root': {
+											'borderRadius': 3,
+											'backgroundColor': theme.palette.background.paper,
+											'boxShadow':
+												theme.palette.mode === 'light'
+													? '0 2px 8px rgba(0,0,0,0.1)'
+													: '0 2px 8px rgba(0,0,0,0.3)',
+											'&:hover': {
+												boxShadow:
+													theme.palette.mode === 'light'
+														? '0 4px 12px rgba(0,0,0,0.15)'
+														: '0 4px 12px rgba(0,0,0,0.4)',
+											},
+											'&.Mui-focused': {
+												boxShadow: `0 0 0 2px ${theme.palette.primary.main}20`,
+											},
+										},
+										'& .MuiInputBase-input': {
+											py: 1.5,
+											fontSize: '1rem',
+										},
+									}}
+									InputProps={{
+										startAdornment: (
+											<InputAdornment position="start">
+												<Search
+													sx={{
+														color: theme.palette.text.secondary,
+														fontSize: '1.2rem',
+													}}
+												/>
+											</InputAdornment>
+										),
+									}}
+								/>
+							</Box>
+
+							{/* Tabs */}
+							<Box sx={{ flexShrink: 0 }}>
+								<Tabs
+									value={tab}
+									onChange={handleTabChange}
+									variant={isMobile ? 'fullWidth' : 'standard'}
+									sx={{
+										'& .MuiTabs-indicator': {
+											height: 3,
+											borderRadius: '3px 3px 0 0',
+											background: `linear-gradient(90deg, 
+												${theme.palette.primary.main} 0%, 
+												${theme.palette.secondary.main} 100%)`,
+										},
+										'& .MuiTab-root': {
+											'textTransform': 'none',
+											'fontWeight': 600,
+											'fontSize': '1rem',
+											'minHeight': 48,
+											'px': 3,
+											'&.Mui-selected': {
+												color: theme.palette.primary.main,
+											},
+											'&:hover': {
+												backgroundColor: theme.palette.action.hover,
+												borderRadius: '8px 8px 0 0',
+											},
+										},
+									}}
+								>
+									<Tab
+										label={
+											<Box display="flex" alignItems="center" gap={1}>
+												<Typography variant="subtitle1" fontWeight="inherit">
+													All Tools
+												</Typography>
+												<Box
+													sx={{
+														px: 1,
+														py: 0.5,
+														bgcolor: theme.palette.primary.main,
+														color: 'white',
+														borderRadius: '12px',
+														fontSize: '0.75rem',
+														fontWeight: 600,
+														minWidth: 20,
+														textAlign: 'center',
+													}}
+												>
+													{baseTools.length}
+												</Box>
+											</Box>
+										}
+									/>
+									<Tab
+										label={
+											<Box display="flex" alignItems="center" gap={1}>
+												<Typography variant="subtitle1" fontWeight="inherit">
+													Favorites
+												</Typography>
+												<Box
+													sx={{
+														px: 1,
+														py: 0.5,
+														bgcolor: theme.palette.error.main,
+														color: 'white',
+														borderRadius: '12px',
+														fontSize: '0.75rem',
+														fontWeight: 600,
+														minWidth: 20,
+														textAlign: 'center',
+													}}
+												>
+													{favorites.length}
+												</Box>
+											</Box>
+										}
+									/>
+								</Tabs>
+							</Box>
+						</Box>
 					</Box>
 				</Slide>
 
@@ -241,7 +329,7 @@ export default function Tools({ toolParam }: { toolParam?: string }) {
 				</Fade>
 
 				{/* Empty State */}
-				{filteredTools.length === 0 && tab === 1 && (
+				{filteredTools.length === 0 && (
 					<Fade in={mounted} timeout={1000}>
 						<Box
 							textAlign="center"
@@ -250,12 +338,34 @@ export default function Tools({ toolParam }: { toolParam?: string }) {
 								opacity: 0.7,
 							}}
 						>
-							<Typography variant="h6" color="text.secondary" gutterBottom>
-								Chưa có công cụ yêu thích nào
-							</Typography>
-							<Typography variant="body2" color="text.secondary">
-								Hãy thêm một số công cụ vào danh sách yêu thích của bạn
-							</Typography>
+							{searchQuery.trim() ? (
+								<>
+									<Typography variant="h6" color="text.secondary" gutterBottom>
+										Không tìm thấy kết quả cho &ldquo;{searchQuery}&rdquo;
+									</Typography>
+									<Typography variant="body2" color="text.secondary">
+										Thử tìm kiếm với từ khóa khác hoặc xóa bộ lọc
+									</Typography>
+								</>
+							) : tab === 1 ? (
+								<>
+									<Typography variant="h6" color="text.secondary" gutterBottom>
+										Chưa có công cụ yêu thích nào
+									</Typography>
+									<Typography variant="body2" color="text.secondary">
+										Hãy thêm một số công cụ vào danh sách yêu thích của bạn
+									</Typography>
+								</>
+							) : (
+								<>
+									<Typography variant="h6" color="text.secondary" gutterBottom>
+										Không có công cụ nào
+									</Typography>
+									<Typography variant="body2" color="text.secondary">
+										Hãy thử lại sau
+									</Typography>
+								</>
+							)}
 						</Box>
 					</Fade>
 				)}

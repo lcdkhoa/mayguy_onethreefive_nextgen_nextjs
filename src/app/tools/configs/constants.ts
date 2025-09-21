@@ -25,7 +25,7 @@ export const ToolCardList = [
 		path: '/tools/object-handler-360f',
 		isSelected: false,
 		version: 'v1.0.0',
-		category: 'Tools',
+		category: 'Dev',
 	},
 	{
 		id: 'a96b7c8d-e85f-4972-a9c0-1da28ec12341',
@@ -37,7 +37,7 @@ export const ToolCardList = [
 		path: '/tools/swagger-creator',
 		isSelected: false,
 		version: 'v1.0.0',
-		category: 'Tools',
+		category: 'Dev',
 	},
 	{
 		id: '7fed39b4-0f29-4d26-894d-d4bb4377722f',
@@ -49,7 +49,7 @@ export const ToolCardList = [
 		path: '/tools/object-handler',
 		isSelected: false,
 		version: 'v1.0.2',
-		category: 'Tools',
+		category: 'Dev',
 	},
 	{
 		id: '346f86db-dfb6-41bf-8b3e-469906e3b97f',
@@ -61,18 +61,7 @@ export const ToolCardList = [
 		path: '/tools/url-original-revealer',
 		isSelected: false,
 		version: 'v1.0.0',
-		category: 'Tools',
-	},
-	{
-		id: '346f86db-dfb6-41bf-8b3e-469906e3b97g',
-		title: 'APTIS Practice',
-		description: 'APTIS Practice is a tool that helps you practice for the APTIS exam.',
-		coverImage: '/images/cards/aptis-british-council.jpg',
-		component: null,
-		path: 'https://aptis-mu.vercel.app?loginType=url&username=admin&password=admin@123',
-		isSelected: false,
-		version: 'v1.0.0',
-		category: 'Tools',
+		category: 'Internet',
 	},
 ];
 
