@@ -94,11 +94,10 @@ export default function ToolsCard(tool: ToolCardProps) {
 							: '0 4px 20px rgba(0,0,0,0.3), 0 1px 3px rgba(0,0,0,0.4)',
 					'transition': 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
 					'&:hover': {
-						transform: 'translateY(-8px)',
 						boxShadow:
 							muiTheme.palette.mode === 'light'
-								? '0 20px 40px rgba(0,0,0,0.15), 0 8px 16px rgba(0,0,0,0.1)'
-								: '0 20px 40px rgba(0,0,0,0.5), 0 8px 16px rgba(0,0,0,0.3)',
+								? '0 10px 15px rgba(0,0,0,0.15), 0 8px 10px rgba(0,0,0,0.1)'
+								: '0 10px 15px rgba(0,0,0,0.5), 0 8px 10px rgba(0,0,0,0.3)',
 					},
 					'&::before': {
 						content: '""',

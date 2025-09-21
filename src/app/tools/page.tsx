@@ -159,7 +159,7 @@ export default function Tools({ toolParam }: { toolParam?: string }) {
 								<TextField
 									fullWidth
 									variant="outlined"
-									placeholder="Tìm kiếm công cụ..."
+									placeholder="Search tools..."
 									value={searchQuery}
 									onChange={handleSearchChange}
 									sx={{
@@ -285,7 +285,7 @@ export default function Tools({ toolParam }: { toolParam?: string }) {
 				</Slide>
 
 				{/* Tools Grid */}
-				<Fade in={mounted} timeout={1200}>
+				<Fade in={mounted} timeout={500} style={{ height: '400px' }}>
 					<Box
 						sx={{
 							display: 'grid',
@@ -314,7 +314,7 @@ export default function Tools({ toolParam }: { toolParam?: string }) {
 										minWidth: { xs: '280px', sm: '300px' },
 									}}
 								>
-									<Slide direction="up" in={mounted} timeout={1400 + index * 100}>
+									<Slide direction="up" in={mounted} timeout={250 + index * 100}>
 										<Box>
 											{isSelected && tool.component && (
 												<tool.component open={isSelected} close={handleClose} />
@@ -341,28 +341,28 @@ export default function Tools({ toolParam }: { toolParam?: string }) {
 							{searchQuery.trim() ? (
 								<>
 									<Typography variant="h6" color="text.secondary" gutterBottom>
-										Không tìm thấy kết quả cho &ldquo;{searchQuery}&rdquo;
+										No results found for &ldquo;{searchQuery}&rdquo;
 									</Typography>
 									<Typography variant="body2" color="text.secondary">
-										Thử tìm kiếm với từ khóa khác hoặc xóa bộ lọc
+										Try searching with different keywords or clear filters
 									</Typography>
 								</>
 							) : tab === 1 ? (
 								<>
 									<Typography variant="h6" color="text.secondary" gutterBottom>
-										Chưa có công cụ yêu thích nào
+										No favorite tools yet
 									</Typography>
 									<Typography variant="body2" color="text.secondary">
-										Hãy thêm một số công cụ vào danh sách yêu thích của bạn
+										Add some tools to your favorite list
 									</Typography>
 								</>
 							) : (
 								<>
 									<Typography variant="h6" color="text.secondary" gutterBottom>
-										Không có công cụ nào
+										No tools found
 									</Typography>
 									<Typography variant="body2" color="text.secondary">
-										Hãy thử lại sau
+										Try again later
 									</Typography>
 								</>
 							)}
