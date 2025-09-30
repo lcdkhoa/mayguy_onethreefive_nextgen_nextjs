@@ -1,5 +1,6 @@
 'use client';
 
+import IconButton from '@/components/Buttons/IconButton';
 import Loading from '@/components/Loading';
 import { ToolCardProps } from '@/types/card.types';
 import { Favorite, FavoriteBorder, Launch, MoreVert, PlayArrow, Share } from '@mui/icons-material';
@@ -11,7 +12,6 @@ import {
 	Fade,
 	Menu,
 	MenuItem,
-	IconButton as MuiIconButton,
 	Tooltip,
 	Typography,
 	useTheme as useMuiTheme,
@@ -162,50 +162,8 @@ export default function ToolsCard(tool: ToolCardProps) {
 							transition: 'opacity 0.3s ease',
 						}}
 					>
-						<Tooltip title="Share">
-							<MuiIconButton
-								size="small"
-								onClick={(e) => {
-									e.stopPropagation();
-									handleShare(tool.path);
-								}}
-								sx={{
-									'backgroundColor': 'rgba(255,255,255,0.9)',
-									'backdropFilter': 'blur(10px)',
-									'&:hover': {
-										backgroundColor: 'rgba(255,255,255,1)',
-									},
-								}}
-							>
-								<Share fontSize="small" />
-							</MuiIconButton>
-						</Tooltip>
-
-						<Tooltip title={isFavorite ? 'Remove from favorites' : 'Add to favorites'}>
-							<MuiIconButton
-								size="small"
-								onClick={(e) => {
-									e.stopPropagation();
-									handleFavorite(tool.path);
-								}}
-								sx={{
-									'backgroundColor': 'rgba(255,255,255,0.9)',
-									'backdropFilter': 'blur(10px)',
-									'&:hover': {
-										backgroundColor: 'rgba(255,255,255,1)',
-									},
-								}}
-							>
-								{isFavorite ? (
-									<Favorite fontSize="small" color="error" />
-								) : (
-									<FavoriteBorder fontSize="small" />
-								)}
-							</MuiIconButton>
-						</Tooltip>
-
 						<Tooltip title="More options">
-							<MuiIconButton
+							<IconButton
 								size="small"
 								onClick={(e) => {
 									e.stopPropagation();
@@ -220,7 +178,7 @@ export default function ToolsCard(tool: ToolCardProps) {
 								}}
 							>
 								<MoreVert fontSize="small" />
-							</MuiIconButton>
+							</IconButton>
 						</Tooltip>
 					</Box>
 
@@ -310,7 +268,7 @@ export default function ToolsCard(tool: ToolCardProps) {
 						/>
 
 						{isExternalLink ? (
-							<MuiIconButton
+							<IconButton
 								component="a"
 								href={tool.path}
 								target="_blank"
@@ -329,9 +287,9 @@ export default function ToolsCard(tool: ToolCardProps) {
 								}}
 							>
 								<Launch fontSize="small" />
-							</MuiIconButton>
+							</IconButton>
 						) : (
-							<MuiIconButton
+							<IconButton
 								component={Link}
 								href={tool.path}
 								onClick={handlePlay}
@@ -348,7 +306,7 @@ export default function ToolsCard(tool: ToolCardProps) {
 								}}
 							>
 								<PlayArrow fontSize="small" />
-							</MuiIconButton>
+							</IconButton>
 						)}
 					</Box>
 				</Box>

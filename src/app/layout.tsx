@@ -54,6 +54,7 @@ function RootLayoutContent({ children }: { children: React.ReactNode }) {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<ThemeProvider>
+			<div className="gradient-background"></div>
 			<RootLayoutContent>{children}</RootLayoutContent>
 		</ThemeProvider>
 	);

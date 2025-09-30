@@ -89,9 +89,6 @@ export default function Tools({ toolParam }: { toolParam?: string }) {
 		<Box
 			sx={{
 				minHeight: '100vh',
-				background: `linear-gradient(135deg, 
-					${theme.palette.background.default} 0%, 
-					${theme.palette.background.paper} 100%)`,
 				py: { xs: 2, md: 4 },
 				width: '100%',
 				overflow: 'hidden',

@@ -1,5 +1,6 @@
+import IconButton from '@/components/Buttons/IconButton';
 import TuneIcon from '@mui/icons-material/Tune';
-import { IconButton, Menu, MenuItem } from '@mui/material';
+import { Menu, MenuItem } from '@mui/material';
 
 interface OptionPopoverProps {
 	id: string;
