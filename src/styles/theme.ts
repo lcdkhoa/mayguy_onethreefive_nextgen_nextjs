@@ -31,40 +31,40 @@ const PLAYFAIR_FONT_FAMILY = "'Playfair Display', Georgia, 'Times New Roman', se
 const MONT_FONT_FAMILY = "'Montserrat', Georgia, 'Times New Roman' ,serif";
 
 const typographyConfig: TypographyConfig = {
-	fontFamily: PLAYFAIR_FONT_FAMILY,
+	fontFamily: MONT_FONT_FAMILY,
 
 	h1: {
-		fontFamily: PLAYFAIR_FONT_FAMILY,
+		fontFamily: MONT_FONT_FAMILY,
 		fontSize: '3rem', // ~48px
 		fontWeight: 700,
 		lineHeight: 1.2,
 	},
 	h2: {
-		fontFamily: PLAYFAIR_FONT_FAMILY,
+		fontFamily: MONT_FONT_FAMILY,
 		fontSize: '2.5rem', // ~40px
 		fontWeight: 700,
 		lineHeight: 1.3,
 	},
 	h3: {
-		fontFamily: PLAYFAIR_FONT_FAMILY,
+		fontFamily: MONT_FONT_FAMILY,
 		fontSize: '2rem', // ~32px
 		fontWeight: 600,
 		lineHeight: 1.3,
 	},
 	h4: {
-		fontFamily: PLAYFAIR_FONT_FAMILY,
+		fontFamily: MONT_FONT_FAMILY,
 		fontSize: '1.75rem', // ~28px
 		fontWeight: 600,
 		lineHeight: 1.4,
 	},
 	h5: {
-		fontFamily: PLAYFAIR_FONT_FAMILY,
+		fontFamily: MONT_FONT_FAMILY,
 		fontSize: '1.5rem', // ~24px
 		fontWeight: 600,
 		lineHeight: 1.4,
 	},
 	h6: {
-		fontFamily: PLAYFAIR_FONT_FAMILY,
+		fontFamily: MONT_FONT_FAMILY,
 		fontSize: '1.25rem', // ~20px
 		fontWeight: 600,
 		lineHeight: 1.5,

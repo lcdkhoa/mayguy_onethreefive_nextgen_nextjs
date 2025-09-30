@@ -4,51 +4,51 @@ export const color = {
 
 	light: {
 		primary: {
-			main: '#6366F1', // Indigo 500 - Modern purple-blue
-			light: '#818CF8', // Indigo 400
-			dark: '#4F46E5', // Indigo 600
+			main: '#1E88E5', // Blue 600
+			light: '#6AB7FF',
+			dark: '#1565C0',
 			contrastText: '#ffffff',
 		},
 		secondary: {
-			main: '#8B5CF6', // Violet 500 - Complementary purple
-			light: '#A78BFA', // Violet 400
-			dark: '#7C3AED', // Violet 600
+			main: '#1565C0', // Blue 800
+			light: '#5E92F3',
+			dark: '#003C8F',
 			contrastText: '#ffffff',
 		},
 		error: {
-			main: '#EF4444', // Red 500 - Modern red
-			light: '#F87171', // Red 400
-			dark: '#DC2626', // Red 600
+			main: '#B3261E',
+			light: '#E57373',
+			dark: '#7F0000',
 			contrastText: '#ffffff',
 		},
 		success: {
-			main: '#10B981', // Emerald 500 - Modern green
-			light: '#34D399', // Emerald 400
-			dark: '#059669', // Emerald 600
+			main: '#0F7B6C',
+			light: '#4FB3A2',
+			dark: '#005B4F',
 			contrastText: '#ffffff',
 		},
 		warning: {
-			main: '#F59E0B', // Amber 500 - Modern orange
-			light: '#FBBF24', // Amber 400
-			dark: '#D97706', // Amber 600
-			contrastText: '#ffffff',
+			main: '#EAA800',
+			light: '#FFD54F',
+			dark: '#B28704',
+			contrastText: '#000000',
 		},
 		info: {
-			main: '#06B6D4', // Cyan 500 - Modern cyan
-			light: '#22D3EE', // Cyan 400
-			dark: '#0891B2', // Cyan 600
+			main: '#227C9D',
+			light: '#6FBACF',
+			dark: '#004C6D',
 			contrastText: '#ffffff',
 		},
 		background: {
 			default: '#FFFFFF',
-			paper: '#F8FAFC', // Slate 50 - Softer background
-			body: '#F1F5F9', // Slate 100 - Modern light gray
-			header: '#FFFFFF',
-			footer: '#F1F5F9',
+			paper: '#F7F7F7',
+			body: '#F2F4F8',
+			header: '#FAFAFA',
+			footer: '#EDEDED',
 		},
 		text: {
-			primary: '#1E293B', // Slate 800 - Modern dark gray
-			secondary: '#64748B', // Slate 500 - Balanced gray
+			primary: '#0B3D91', // Navy Blue
+			secondary: '#5C86C7', // Light Blue
 		},
 		shadow: [
 			'none',
@@ -67,51 +67,51 @@ export const color = {
 
 	dark: {
 		primary: {
-			main: '#818CF8', // Indigo 400 - Lighter for dark mode
-			light: '#A5B4FC', // Indigo 300
-			dark: '#6366F1', // Indigo 500
-			contrastText: '#1E293B',
+			main: '#90CAF9', // Blue 200
+			light: '#C3FDFF',
+			dark: '#5D99C6',
+			contrastText: '#0B3D91',
 		},
 		secondary: {
-			main: '#A78BFA', // Violet 400 - Lighter for dark mode
-			light: '#C4B5FD', // Violet 300
-			dark: '#8B5CF6', // Violet 500
-			contrastText: '#1E293B',
+			main: '#64B5F6', // Blue 300
+			light: '#9BE7FF',
+			dark: '#2286C3',
+			contrastText: '#0B3D91',
 		},
 		error: {
-			main: '#F87171', // Red 400 - Lighter for dark mode
-			light: '#FCA5A5', // Red 300
-			dark: '#EF4444', // Red 500
-			contrastText: '#1E293B',
+			main: '#F2B8B5',
+			light: '#FFEBEE',
+			dark: '#B00020',
+			contrastText: '#1C1B1F',
 		},
 		success: {
-			main: '#34D399', // Emerald 400 - Lighter for dark mode
-			light: '#6EE7B7', // Emerald 300
-			dark: '#10B981', // Emerald 500
-			contrastText: '#1E293B',
+			main: '#A6E3D3',
+			light: '#D0FFF4',
+			dark: '#74B2A3',
+			contrastText: '#1C1B1F',
 		},
 		warning: {
-			main: '#FBBF24', // Amber 400 - Lighter for dark mode
-			light: '#FCD34D', // Amber 300
-			dark: '#F59E0B', // Amber 500
-			contrastText: '#1E293B',
+			main: '#FFD60A',
+			light: '#FFE082',
+			dark: '#C7A500',
+			contrastText: '#1C1B1F',
 		},
 		info: {
-			main: '#22D3EE', // Cyan 400 - Lighter for dark mode
-			light: '#67E8F9', // Cyan 300
-			dark: '#06B6D4', // Cyan 500
-			contrastText: '#1E293B',
+			main: '#66D1FF',
+			light: '#A6FFFF',
+			dark: '#2196F3',
+			contrastText: '#1C1B1F',
 		},
 		background: {
-			default: '#0F172A', // Slate 900 - Modern dark background
-			paper: '#1E293B', // Slate 800 - Card background
-			body: '#0F172A', // Slate 900 - Page background
-			header: '#1E293B',
-			footer: '#334155', // Slate 700
+			default: '#121212',
+			paper: '#1E1E1E',
+			body: '#181818',
+			header: '#0F0F0F',
+			footer: '#2A2A2A',
 		},
 		text: {
-			primary: '#F8FAFC', // Slate 50 - High contrast white
-			secondary: '#CBD5E1', // Slate 300 - Medium contrast gray
+			primary: '#90CAF9', // Light Blue
+			secondary: '#64B5F6', // Sky Blue
 		},
 		shadow: [
 			'none',
