@@ -1,5 +1,6 @@
 'use client';
 
+import ButtonWithLink from '@/components/Buttons/ButtonWithLink';
 import IconButton from '@/components/Buttons/IconButton';
 import Loading from '@/components/Loading';
 import { ToolCardProps } from '@/types/card.types';
@@ -268,13 +269,10 @@ export default function ToolsCard(tool: ToolCardProps) {
 						/>
 
 						{isExternalLink ? (
-							<IconButton
-								component="a"
-								href={tool.path}
-								target="_blank"
-								rel="noopener noreferrer"
+							<ButtonWithLink
+								url={tool.path}
+								onTarget={false}
 								onClick={handlePlay}
-								size="small"
 								sx={{
 									'backgroundColor': muiTheme.palette.primary.main,
 									'color': 'white',
@@ -287,13 +285,12 @@ export default function ToolsCard(tool: ToolCardProps) {
 								}}
 							>
 								<Launch fontSize="small" />
-							</IconButton>
+							</ButtonWithLink>
 						) : (
-							<IconButton
-								component={Link}
-								href={tool.path}
+							<ButtonWithLink
+								url={tool.path}
+								onTarget={false}
 								onClick={handlePlay}
-								size="small"
 								sx={{
 									'backgroundColor': muiTheme.palette.primary.main,
 									'color': 'white',
@@ -306,7 +303,7 @@ export default function ToolsCard(tool: ToolCardProps) {
 								}}
 							>
 								<PlayArrow fontSize="small" />
-							</IconButton>
+							</ButtonWithLink>
 						)}
 					</Box>
 				</Box>
