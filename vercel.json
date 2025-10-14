@@ -1,0 +1,9 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/citd-scores",
+      "schedule": "*/1 * * * *",
+      "method": "POST"
+    }
+  ]
+}
