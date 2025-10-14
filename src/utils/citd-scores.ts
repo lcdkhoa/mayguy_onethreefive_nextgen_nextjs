@@ -6,10 +6,15 @@ export interface CitdScoreRow {
 	avg: unknown;
 }
 
-const getConfig = () => {
+type CitdOverrides = {
+	cookie?: string;
+	csrfToken?: string;
+};
+
+const getConfig = (overrides?: CitdOverrides) => {
 	const url = process.env.CITD_SCORES_URL;
-	const cookie = process.env.CITD_COOKIE;
-	const csrfToken = process.env.CITD_RISE_CSRF_TOKEN;
+	const cookie = overrides?.cookie ?? process.env.CITD_COOKIE;
+	const csrfToken = overrides?.csrfToken ?? process.env.CITD_RISE_CSRF_TOKEN;
 
 	if (!url || !cookie || !csrfToken) {
 		throw new Error(
@@ -20,8 +25,8 @@ const getConfig = () => {
 	return { url, cookie, csrfToken };
 };
 
-export async function fetchScores(): Promise<CitdScoreRow[]> {
-	const { url, cookie, csrfToken } = getConfig();
+export async function fetchScores(overrides?: CitdOverrides): Promise<CitdScoreRow[]> {
+	const { url, cookie, csrfToken } = getConfig(overrides);
 
 	const body = new URLSearchParams({
 		rise_csrf_token: csrfToken,
@@ -59,11 +64,10 @@ export async function fetchScores(): Promise<CitdScoreRow[]> {
 				credits: undefined,
 				avg: undefined,
 			};
-		const [stt, code, name, credits, d1, d2, d3, d4, avg] = r as unknown[];
+		const [stt, code, name, credits, , , , , avg] = r as unknown[];
 		return { stt, code, name, credits, avg };
 	});
 
-	// eslint-disable-next-line no-console
 	console.log(`✅ [${new Date().toISOString()}] Fetched ${result.length} records`);
 	return result;
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 type ScoreRow = {
 	stt: unknown;
@@ -18,11 +18,21 @@ export default function CitdScoresPage() {
 	const [timestamp, setTimestamp] = useState<string>('');
 	const [countdown, setCountdown] = useState<number>(REFRESH_INTERVAL_SECONDS);
 	const countdownRef = useRef<number>(REFRESH_INTERVAL_SECONDS);
+	const [cookie, setCookie] = useState<string>('');
+	const [csrfToken, setCsrfToken] = useState<string>('');
 
-	async function loadScores() {
+	const loadScores = useCallback(async () => {
 		try {
 			setError(null);
-			const res = await fetch('/api/scores', { cache: 'no-store' });
+			const payload: Record<string, string> = {};
+			if (cookie.trim()) payload.cookie = cookie.trim();
+			if (csrfToken.trim()) payload.csrfToken = csrfToken.trim();
+			const res = await fetch('/api/scores', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(payload),
+				cache: 'no-store',
+			});
 			const json = await res.json();
 			if (!json.ok) throw new Error(json.error);
 			setScores(json.data as ScoreRow[]);
@@ -33,7 +43,7 @@ export default function CitdScoresPage() {
 			const message = e instanceof Error ? e.message : 'Unknown error';
 			setError('❌ Lỗi tải dữ liệu: ' + message);
 		}
-	}
+	}, [cookie, csrfToken]);
 
 	useEffect(() => {
 		loadScores();
@@ -48,7 +58,7 @@ export default function CitdScoresPage() {
 			});
 		}, 1000);
 		return () => clearInterval(timer);
-	}, []);
+	}, [loadScores]);
 
 	const counterClassName = countdown <= 10 ? 'danger' : countdown <= 20 ? 'warning' : '';
 
@@ -57,6 +67,29 @@ export default function CitdScoresPage() {
 			<h1 style={{ color: '#2f3640', fontFamily: 'Segoe UI, sans-serif' }}>
 				Bảng điểm sinh viên CITD
 			</h1>
+			<div className="controls">
+				<div className="field">
+					<label htmlFor="cookie">COOKIE</label>
+					<input
+						id="cookie"
+						type="text"
+						placeholder="Nhập CITD COOKIE của bạn"
+						value={cookie}
+						onChange={(e) => setCookie(e.target.value)}
+					/>
+				</div>
+				<div className="field">
+					<label htmlFor="csrf">RISE CSRF TOKEN</label>
+					<input
+						id="csrf"
+						type="text"
+						placeholder="Nhập CITD RISE CSRF TOKEN của bạn"
+						value={csrfToken}
+						onChange={(e) => setCsrfToken(e.target.value)}
+					/>
+				</div>
+				<button onClick={() => void loadScores()}>Tải lại</button>
+			</div>
 			<div id="content">
 				{error ? (
 					<p>{error}</p>
@@ -95,6 +128,41 @@ export default function CitdScoresPage() {
 			</div>
 
 			<style jsx>{`
+				.controls {
+					display: flex;
+					gap: 12px;
+					align-items: flex-end;
+					margin: 12px 0 16px;
+				}
+
+				.field {
+					display: flex;
+					flex-direction: column;
+					gap: 6px;
+				}
+
+				.field label {
+					font-size: 0.9em;
+					color: #555;
+				}
+
+				.field input {
+					min-width: 360px;
+					padding: 8px 10px;
+					border: 1px solid #dcdde1;
+					border-radius: 6px;
+					outline: none;
+				}
+
+				button {
+					padding: 8px 12px;
+					background: #273c75;
+					color: #fff;
+					border: none;
+					border-radius: 6px;
+					cursor: pointer;
+				}
+
 				.table-wrapper {
 					background: #ffffff;
 					border-radius: 8px;

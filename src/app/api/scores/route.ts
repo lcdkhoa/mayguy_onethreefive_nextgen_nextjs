@@ -1,5 +1,5 @@
 import { fetchScores } from '@/utils/citd-scores';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 export const dynamic = 'force-dynamic';
 
@@ -10,6 +10,21 @@ export async function GET() {
 	} catch (e) {
 		const message = e instanceof Error ? e.message : 'Unknown error';
 		console.error('❌ Fetch failed', e);
+		return NextResponse.json({ ok: false, error: message }, { status: 500 });
+	}
+}
+
+export async function POST(request: NextRequest) {
+	try {
+		const body = await request.json().catch(() => ({}));
+		const cookie = typeof body?.cookie === 'string' ? body.cookie : undefined;
+		const csrfToken = typeof body?.csrfToken === 'string' ? body.csrfToken : undefined;
+
+		const data = await fetchScores({ cookie, csrfToken });
+		return NextResponse.json({ ok: true, data });
+	} catch (e) {
+		const message = e instanceof Error ? e.message : 'Unknown error';
+		console.error('❌ Fetch failed (POST)', e);
 		return NextResponse.json({ ok: false, error: message }, { status: 500 });
 	}
 }
