@@ -63,6 +63,17 @@ export const ToolCardList = [
 		version: 'v1.0.0',
 		category: 'Internet',
 	},
+	{
+		id: '0f3a1a6b-0a11-4b7b-9b8e-1a2c3d4e5f60',
+		title: 'CITD Scores',
+		description: 'Bảng điểm sinh viên CITD với tự động cập nhật.',
+		coverImage: '/images/cards/citd.png',
+		component: undefined as unknown as never,
+		path: '/citd-scores',
+		isSelected: false,
+		version: 'v1.0.0',
+		category: 'Internet',
+	},
 ];
 
 export const ToolSwaggers = [

@@ -282,7 +282,7 @@ export default function Tools({ toolParam }: { toolParam?: string }) {
 				</Slide>
 
 				{/* Tools Grid */}
-				<Fade in={mounted} timeout={500} style={{ height: '400px' }}>
+				<Fade in={mounted} timeout={500}>
 					<Box
 						sx={{
 							display: 'grid',
