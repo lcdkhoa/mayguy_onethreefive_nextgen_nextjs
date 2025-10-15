@@ -10,6 +10,7 @@ import { color } from '@/styles/color';
 import '@/styles/css/fonts.css';
 import '@/styles/css/index.css';
 import { Grid } from '@mui/material';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 function RootLayoutContent({ children }: { children: React.ReactNode }) {
 	const { theme } = useTheme();
@@ -46,6 +47,7 @@ function RootLayoutContent({ children }: { children: React.ReactNode }) {
 						</Grid>
 					</DeviceProvider>
 				</ThemeRegistry>
+				<SpeedInsights />
 			</body>
 		</html>
 	);
