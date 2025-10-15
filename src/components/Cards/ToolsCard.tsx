@@ -17,7 +17,6 @@ import {
 	Typography,
 	useTheme as useMuiTheme,
 } from '@mui/material';
-import Link from 'next/link';
 import { useState } from 'react';
 
 import ShareDialog from './SharePopup';
@@ -86,6 +85,8 @@ export default function ToolsCard(tool: ToolCardProps) {
 					'overflow': 'hidden',
 					'position': 'relative',
 					'maxWidth': '100%',
+					'display': 'flex',
+					'flexDirection': 'column',
 					'background': `linear-gradient(145deg, 
 						${muiTheme.palette.background.paper} 0%, 
 						${muiTheme.palette.background.default} 100%)`,
@@ -95,10 +96,7 @@ export default function ToolsCard(tool: ToolCardProps) {
 							: '0 4px 20px rgba(0,0,0,0.3), 0 1px 3px rgba(0,0,0,0.4)',
 					'transition': 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
 					'&:hover': {
-						boxShadow:
-							muiTheme.palette.mode === 'light'
-								? '0 10px 15px rgba(0,0,0,0.15), 0 8px 10px rgba(0,0,0,0.1)'
-								: '0 10px 15px rgba(0,0,0,0.5), 0 8px 10px rgba(0,0,0,0.3)',
+						transform: 'translateY(-2px)',
 					},
 					'&::before': {
 						content: '""',
@@ -111,6 +109,13 @@ export default function ToolsCard(tool: ToolCardProps) {
 							${muiTheme.palette.primary.main} 0%, 
 							${muiTheme.palette.secondary.main} 100%)`,
 						zIndex: 1,
+						transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+						opacity: 0.7,
+					},
+					'&:hover::before': {
+						opacity: 1,
+						height: 6,
+						boxShadow: `0 0 20px ${muiTheme.palette.primary.main}40`,
 					},
 				}}
 			>
@@ -206,7 +211,17 @@ export default function ToolsCard(tool: ToolCardProps) {
 				</Box>
 
 				{/* Content */}
-				<Box sx={{ p: 2.5, width: '100%', boxSizing: 'border-box' }}>
+				<Box
+					sx={{
+						p: 2.5,
+						width: '100%',
+						boxSizing: 'border-box',
+						display: 'flex',
+						flexDirection: 'column',
+						flex: 1,
+						minHeight: 0,
+					}}
+				>
 					<Typography
 						variant="h6"
 						component="h3"
@@ -231,12 +246,14 @@ export default function ToolsCard(tool: ToolCardProps) {
 						sx={{
 							lineHeight: 1.5,
 							display: '-webkit-box',
-							WebkitLineClamp: 3,
+							WebkitLineClamp: 2,
 							WebkitBoxOrient: 'vertical',
 							overflow: 'hidden',
 							mb: 2,
 							wordBreak: 'break-word',
 							hyphens: 'auto',
+							flex: 1,
+							minHeight: '3em', // Đảm bảo chiều cao tối thiểu cho 2 dòng
 						}}
 					>
 						{tool.description}
@@ -250,6 +267,7 @@ export default function ToolsCard(tool: ToolCardProps) {
 							alignItems: 'center',
 							width: '100%',
 							minWidth: 0,
+							mt: 'auto', // Đẩy phần này xuống dưới cùng
 						}}
 					>
 						<Chip

@@ -74,6 +74,18 @@ export const ToolCardList = [
 		version: 'v1.0.0',
 		category: 'Internet',
 	},
+	{
+		id: '0f3a1a6b-0a11-4b7b-9b8g-1a2c3d4e5f60',
+		title: 'Thi thử Aptis',
+		description:
+			'Test chứng chỉ Aptis của British Council với bộ đề chất lượng và tự động chấm điểm.',
+		coverImage: '/images/cards/aptis-british-council.jpg',
+		component: undefined as unknown as never,
+		path: 'https://thi-thu-aptis.vercel.app/',
+		isSelected: false,
+		version: 'v1.0.0',
+		category: 'Internet',
+	},
 ];
 
 export const ToolSwaggers = [
