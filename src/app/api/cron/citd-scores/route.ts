@@ -1,4 +1,4 @@
-import { buildScoresHtmlTable, fetchScores } from '@/utils/citd-scores';
+import { fetchScores } from '@/utils/citd-scores';
 import { sendMail } from '@/utils/mailing';
 import { NextResponse } from 'next/server';
 
@@ -8,10 +8,10 @@ export const dynamic = 'force-dynamic';
 export async function POST() {
 	try {
 		const scores = await fetchScores();
-		const html = buildScoresHtmlTable(scores);
+		// const html = buildScoresHtmlTable(scores);
 
 		if (scores.length > 5) {
-			await sendMail('📬 Báo cáo điểm CITD tự động', html);
+			await sendMail('📬 Báo cáo điểm CITD tự động');
 		}
 
 		return NextResponse.json({ ok: true, count: scores.length });

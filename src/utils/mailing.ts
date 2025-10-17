@@ -10,7 +10,7 @@ const SENT_FROM = {
 
 export async function sendMail(
 	subject = 'Báo cáo điểm CITD tự động',
-	html = '<h1>Điểm CITD</h1><p>Đây là email tự động gửi từ hệ thống CITD Scores.</p>',
+	html = '<h1>Điểm CITD</h1><p>Có điểm mới, mọi người vào check nhé.</p>',
 	recipients = process.env.MAILING_RECIPIENTS?.split(',') ?? ['lcdkhoa@hotmail.com']
 ): Promise<void> {
 	const msg = {
