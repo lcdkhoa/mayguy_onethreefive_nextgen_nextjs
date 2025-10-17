@@ -34,7 +34,7 @@ export default function CitdScoresPage() {
 				cache: 'no-store',
 			});
 			const json = await res.json();
-			if (!json.ok) throw new Error(json.error);
+			if (!json.success) throw new Error(json.error);
 			setScores(json.data as ScoreRow[]);
 			setTimestamp(new Date().toLocaleTimeString());
 			countdownRef.current = REFRESH_INTERVAL_SECONDS;
