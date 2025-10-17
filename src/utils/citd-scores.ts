@@ -67,7 +67,6 @@ export async function fetchScores(overrides?: CitdOverrides): Promise<CitdScoreR
 		const [stt, code, name, credits, , , , , avg] = r as unknown[];
 		return { stt, code, name, credits, avg };
 	});
-
 	console.log(`✅ [${new Date().toISOString()}] Fetched ${result.length} records`);
 	return result;
 }
