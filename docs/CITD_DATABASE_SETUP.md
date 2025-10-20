@@ -2,7 +2,7 @@
 
 ## Tổng quan
 
-Hệ thống đã được cập nhật để sử dụng SQLite database thay vì environment variable `CURRENT_CITD_CODE` để lưu trữ các mã CITD đã xử lý.
+Hệ thống đã được cập nhật để sử dụng PostgreSQL database (thông qua Supabase) để lưu trữ các mã CITD đã xử lý thay vì SQLite hoặc environment variable `CURRENT_CITD_CODE`.
 
 ## Cấu trúc Database
 
@@ -20,8 +20,8 @@ Hệ thống đã được cập nhật để sử dụng SQLite database thay v
 Thêm các biến môi trường sau vào file `.env`:
 
 ```env
-# SQLite Database Configuration
-SQLITE_DATABASE_PATH=./database.sqlite
+# PostgreSQL Database Configuration (Supabase)
+DATABASE_URL=postgresql://username:password@host:port/database
 DATABASE_LOGGING=false
 ```
 
@@ -98,15 +98,16 @@ npm install
 
 2. Database sẽ tự động tạo khi chạy lần đầu (development mode)
 
-3. File SQLite sẽ được tạo tại `./database.sqlite` (hoặc đường dẫn trong `SQLITE_DATABASE_PATH`)
+3. Table `citd_codes` sẽ được tạo trong PostgreSQL database
 
 ## Lợi ích
 
-1. **Persistent Storage**: Dữ liệu không bị mất khi restart server
+1. **Cloud Storage**: Dữ liệu được lưu trữ trên Supabase cloud
 2. **Scalable**: Có thể lưu trữ nhiều thông tin hơn (tên, tín chỉ, điểm)
 3. **Queryable**: Có thể truy vấn và phân tích dữ liệu
 4. **Reliable**: Không phụ thuộc vào environment variables
 5. **Audit Trail**: Có timestamp để theo dõi lịch sử
+6. **Vercel Compatible**: Hoạt động tốt với Vercel deployment
 
 ## Migration từ Environment Variable
 

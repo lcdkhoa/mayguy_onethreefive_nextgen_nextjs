@@ -1,4 +1,4 @@
-import { sqliteConnection } from '@/database/data-source';
+import dbConnection from '@/database/data-source';
 import { CitdScoreRow } from '@/utils/citd-scores';
 import { Repository } from 'typeorm';
 
@@ -9,7 +9,7 @@ export class CitdCodeService {
 
 	private async getRepository(): Promise<Repository<CitdCode>> {
 		if (!this.repository) {
-			const dataSource = await sqliteConnection.getDataSource();
+			const dataSource = await dbConnection.getDataSource();
 			this.repository = dataSource.getRepository(CitdCode);
 		}
 		return this.repository;
